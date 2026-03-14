@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///home/razu/programming/personanl%20projects/razu-dev-portfolio/app/not-found.tsx"],"sourcesContent":["\"use client\";\n\nimport Link from \"next/link\";\n\nexport default function NotFound() {\n  return (\n    <div className=\"flex min-h-screen items-center justify-center bg-background\">\n      <div className=\"text-center px-6\">\n        <h1 className=\"mb-4 font-display font-extrabold text-9xl text-stroke-accent\">404</h1>\n        <p className=\"mb-4 font-heading text-2xl text-foreground\">Page Not Found</p>\n        <p className=\"mb-8 font-body text-muted-foreground\">The page you're looking for doesn't exist or has been moved.</p>\n        <Link\n          href=\"/\"\n          className=\"inline-block bg-primary text-primary-foreground font-heading font-bold text-sm px-8 py-3 hover:brightness-110 transition-all\"\n        >\n          Back to Home →\n        </Link>\n      </div>\n    </div>\n  );\n}\n"],"names":[],"mappings":";;;;;AAEA;AAFA;;;AAIe,SAAS;IACtB,qBACE,8OAAC;QAAI,WAAU;kBACb,cAAA,8OAAC;YAAI,WAAU;;8BACb,8OAAC;oBAAG,WAAU;8BAA+D;;;;;;8BAC7E,8OAAC;oBAAE,WAAU;8BAA6C;;;;;;8BAC1D,8OAAC;oBAAE,WAAU;8BAAuC;;;;;;8BACpD,8OAAC,uKAAI;oBACH,MAAK;oBACL,WAAU;8BACX;;;;;;;;;;;;;;;;;AAMT"}}]
-}
