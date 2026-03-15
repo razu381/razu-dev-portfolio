@@ -3,7 +3,7 @@ import Navbar from "@/components/shared/Navbar";
 import HeroSection from "@/components/hero/HeroSection";
 import AboutSection from "@/components/about/AboutSection";
 import ServicesSection from "@/components/services/ServicesSection";
-import ProjectsSection, { Concept01BrutalistScroll, Concept02BentoGrid, Concept03VerticalSidebar, Concept04Accordion } from "@/components/projects/ProjectsSection";
+import ProjectsSection, { Concept03VerticalSidebar } from "@/components/projects/ProjectsSection";
 import BlogPreviewSection from "@/components/blog/BlogPreviewSection";
 import ReviewsSection from "@/components/reviews/ReviewsSection";
 import ContactSection from "@/components/contact/ContactSection";
@@ -24,14 +24,8 @@ export default function Home() {
       />
       <ServicesSection />
       <ProjectsSection />
-      {/* Concept 01: Brutalist Horizontal Scroll */}
-      <Concept01BrutalistScroll />
-      {/* Concept 02: Asymmetric Bento Grid */}
-      <Concept02BentoGrid />
       {/* Concept 03: Vertical Sidebar Index */}
       <Concept03VerticalSidebar />
-      {/* Concept 04: Hover-Expand Accordion */}
-      <Concept04Accordion />
       <BlogPreviewSection />
       <ReviewsSection />
       <ContactSection />
