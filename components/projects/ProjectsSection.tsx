@@ -166,8 +166,10 @@ const Concept03SidebarButton = ({ number, index, activeIndex, onClick }: {
 
   return (
     <button
-      className={`flex-1 flex items-center justify-center transition-all duration-150 border-b border-zinc-900 hover:bg-green-950 hover:text-primary ${
-        isActive ? 'bg-primary text-primary-foreground' : 'text-neutral-800'
+      className={`flex-1 flex items-center justify-center transition-all duration-150 border-b border-zinc-700 ${
+        isActive 
+          ? 'bg-primary text-primary-foreground border-primary' 
+          : 'bg-green-950/30 text-primary/70 hover:bg-green-950/60 hover:text-primary'
       }`}
       onClick={() => onClick(index)}
     >
