@@ -48,7 +48,7 @@ const ContactSection = () => {
   const inputClass = "w-full bg-surface-alt border border-foreground/[0.06] text-foreground px-4 py-3.5 font-body text-sm focus:border-primary focus:outline-none transition-colors placeholder:text-muted-foreground/50";
 
   return (
-    <section id="contact" className="relative py-24 md:py-32 overflow-hidden" style={{ background: "#0a0a0a" }}>
+    <section id="contact" className="relative py-24 md:py-32 overflow-hidden">
       {/* Vertical label */}
       <div className="hidden lg:block absolute left-6 top-32 font-mono-label text-xs text-primary tracking-[0.2em] uppercase"
         style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}>
