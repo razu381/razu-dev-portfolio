@@ -83,7 +83,7 @@ const ProjectCard = ({ project, variants, index, isMobile }: {
 const ProjectsSection = () => {
 
   return (
-    <section id="projects" className="relative py-24 md:py-32 overflow-hidden">
+    <section id="projects" className="relative py-24 md:py-32 overflow-hidden" style={{ background: "#0a0a0a" }}>
       {/* Vertical label */}
       <div className="hidden lg:block absolute left-6 top-32 font-mono-label text-xs text-primary tracking-[0.2em] uppercase"
         style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}>

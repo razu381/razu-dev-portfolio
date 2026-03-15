@@ -31,7 +31,7 @@ const fadeUp = {
 
 const ReviewsSection = () => {
   return (
-    <section id="reviews" className="relative py-24 md:py-32 overflow-hidden" style={{ background: "#0a0a0a" }}>
+    <section id="reviews" className="relative py-24 md:py-32 overflow-hidden">
       {/* Vertical label */}
       <div className="hidden lg:block absolute left-6 top-32 font-mono-label text-xs text-primary tracking-[0.2em] uppercase"
         style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}>

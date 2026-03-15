@@ -14,7 +14,7 @@ const previewPosts = posts.slice(0, 3);
 
 const BlogPreviewSection = () => {
   return (
-    <section id="blog" className="relative py-24 md:py-32 overflow-hidden" style={{ background: "#0a0a0a" }}>
+    <section id="blog" className="relative py-24 md:py-32 overflow-hidden">
       <Marquee text="LATEST POSTS · LATEST POSTS · LATEST POSTS ·" highlightWords={["LATEST"]} />
 
       {/* Vertical label */}
