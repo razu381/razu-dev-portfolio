@@ -97,7 +97,7 @@ const HeroSection = () => {
                   Frontend Developer · React · Next.js · Tailwind
                 </span>
                 <div className="w-px h-8 bg-muted-foreground/30 mt-4" />
-                <span className="font-mono-label text-xs text-muted-foreground">01/05</span>
+                <span className="font-mono-label text-xs text-muted-foreground">01/06</span>
               </div>
 
               {/* Main content */}
