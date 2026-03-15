@@ -3,7 +3,7 @@ import Navbar from "@/components/shared/Navbar";
 import HeroSection from "@/components/hero/HeroSection";
 import AboutSection from "@/components/about/AboutSection";
 import ServicesSection from "@/components/services/ServicesSection";
-import ProjectsSection, { Concept03VerticalSidebar } from "@/components/projects/ProjectsSection";
+import ProjectsSection, { ProjectSidebar } from "@/components/projects/ProjectsSection";
 import BlogPreviewSection from "@/components/blog/BlogPreviewSection";
 import ReviewsSection from "@/components/reviews/ReviewsSection";
 import ContactSection from "@/components/contact/ContactSection";
@@ -24,8 +24,8 @@ export default function Home() {
       />
       <ServicesSection />
       <ProjectsSection />
-      {/* Concept 03: Vertical Sidebar Index */}
-      <Concept03VerticalSidebar />
+      {/* Project Sidebar */}
+      <ProjectSidebar />
       <BlogPreviewSection />
       <ReviewsSection />
       <ContactSection />

@@ -155,7 +155,7 @@ const projects = [
   },
 ];
 
-const Concept03SidebarButton = ({ number, index, activeIndex, onClick }: {
+const ProjectButton = ({ number, index, activeIndex, onClick }: {
   number: number;
   index: number;
   activeIndex: number;
@@ -186,7 +186,7 @@ const Concept03SidebarButton = ({ number, index, activeIndex, onClick }: {
   );
 };
 
-const Concept03ContentPanel = ({ project, isActive }: {
+const ProjectPanel = ({ project, isActive }: {
   project: typeof projects[0];
   isActive: boolean;
 }) => {
@@ -246,7 +246,7 @@ const Concept03ContentPanel = ({ project, isActive }: {
   );
 };
 
-export const Concept03VerticalSidebar = () => {
+export const ProjectSidebar = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
@@ -261,7 +261,7 @@ export const Concept03VerticalSidebar = () => {
           {/* Left Sidebar */}
           <div className="flex flex-col w-[60px] border-r-2 border-primary">
             {projects.map((project, index) => (
-              <Concept03SidebarButton
+              <ProjectButton
                 key={project.id}
                 number={index + 1}
                 index={index}
@@ -274,7 +274,7 @@ export const Concept03VerticalSidebar = () => {
           {/* Right Content Area */}
           <div className="flex-1 p-8 md:p-12 relative">
             {projects.map((project, index) => (
-              <Concept03ContentPanel
+              <ProjectPanel
                 key={project.id}
                 project={project}
                 isActive={activeIndex === index}
