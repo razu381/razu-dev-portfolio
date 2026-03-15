@@ -1,7 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Marquee from "./Marquee";
+import { useTilt } from "@/hooks/useTilt";
+import { useRef } from "react";
 
 const projects = [
   { name: "Luminary — SaaS Landing Page", tags: ["Next.js", "Tailwind CSS", "Framer Motion"], desc: "High-converting SaaS landing page with animated hero, scroll-triggered sections, and a 98 PageSpeed score.", align: "left", width: "65%" },
@@ -14,6 +16,68 @@ const projects = [
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
+
+// Project card with 3D tilt effect
+const ProjectCard = ({ project, variants, index, isMobile }: {
+  project: typeof projects[0];
+  variants: any;
+  index: number;
+  isMobile?: boolean;
+}) => {
+  const { ref, style, onMouseMove, onMouseLeave } = useTilt();
+  const imageRef = useRef<HTMLDivElement>(null);
+
+  // Parallax zoom effect
+  const { scrollYProgress } = useScroll({
+    target: imageRef,
+    offset: ["start end", "end start"],
+  });
+
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.05, 1]);
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{ ...style, maxWidth: isMobile ? undefined : project.width }}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-50px" }}
+      variants={variants}
+      className={`relative w-full ${isMobile ? "snap-center shrink-0 w-[85vw]" : ""} ${project.align === "right" && !isMobile ? "ml-auto" : ""}`}
+    >
+      <div className="brutalist-card bg-surface border border-border overflow-hidden group relative">
+        {/* Image placeholder with parallax */}
+        <motion.div
+          ref={imageRef}
+          style={{ scale }}
+          className="w-full aspect-video flex items-center justify-center overflow-hidden"
+        >
+          <div style={{ background: "linear-gradient(135deg, #111 0%, #0d1a10 100%)" }} className="w-full h-full flex items-center justify-center">
+            <span className="font-mono-label text-xs text-muted-foreground tracking-wider">[ PROJECT SCREENSHOT ]</span>
+          </div>
+        </motion.div>
+
+        {/* Content */}
+        <div className="p-5 md:p-6">
+          <div className="flex flex-wrap gap-2 mb-3">
+            {project.tags.map(t => (
+              <span key={t} className="font-mono-label text-[10px] px-2.5 py-1 border border-primary/30 text-primary tracking-wider uppercase">{t}</span>
+            ))}
+          </div>
+          <h3 className="font-heading font-bold text-lg text-foreground mb-1">{project.name}</h3>
+          <p className="font-body text-sm text-muted-foreground">{project.desc}</p>
+        </div>
+
+        {/* Hover overlay */}
+        <div className="absolute inset-0 bg-[rgba(0,20,5,0.9)] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <span className="font-heading font-bold text-primary text-sm tracking-wider">VIEW PROJECT →</span>
+        </div>
+      </div>
+    </motion.div>
+  );
 };
 
 const ProjectsSection = () => {
@@ -37,37 +101,17 @@ const ProjectsSection = () => {
           React · Next.js · Tailwind CSS · TypeScript · Framer Motion
         </p>
 
-        <div className="space-y-[-2rem] md:space-y-[-3rem]">
+        {/* Desktop: overlapping grid */}
+        <div className="hidden md:block space-y-[-3rem]">
           {projects.map((p, i) => (
-            <motion.div key={p.name}
-              initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }}
-              variants={fadeUp}
-              className={`relative w-full ${p.align === "right" ? "ml-auto" : ""}`}
-              style={{ maxWidth: p.width }}>
-              <div className="brutalist-card bg-surface border border-border overflow-hidden group relative">
-                {/* Image placeholder */}
-                <div className="w-full aspect-video flex items-center justify-center"
-                  style={{ background: "linear-gradient(135deg, #111 0%, #0d1a10 100%)" }}>
-                  <span className="font-mono-label text-xs text-muted-foreground tracking-wider">[ PROJECT SCREENSHOT ]</span>
-                </div>
+            <ProjectCard key={p.name} project={p} variants={fadeUp} index={i} />
+          ))}
+        </div>
 
-                {/* Content */}
-                <div className="p-5 md:p-6">
-                  <div className="flex flex-wrap gap-2 mb-3">
-                    {p.tags.map(t => (
-                      <span key={t} className="font-mono-label text-[10px] px-2.5 py-1 border border-primary/30 text-primary tracking-wider uppercase">{t}</span>
-                    ))}
-                  </div>
-                  <h3 className="font-heading font-bold text-lg text-foreground mb-1">{p.name}</h3>
-                  <p className="font-body text-sm text-muted-foreground">{p.desc}</p>
-                </div>
-
-                {/* Hover overlay */}
-                <div className="absolute inset-0 bg-[rgba(0,20,5,0.9)] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="font-heading font-bold text-primary text-sm tracking-wider">VIEW PROJECT →</span>
-                </div>
-              </div>
-            </motion.div>
+        {/* Mobile: horizontal scroll snap */}
+        <div className="md:hidden flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 -mx-6 px-6 scrollbar-hide">
+          {projects.map((p, i) => (
+            <ProjectCard key={p.name} project={p} variants={fadeUp} index={i} isMobile />
           ))}
         </div>
       </div>

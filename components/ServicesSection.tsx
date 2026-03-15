@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Monitor, Zap, Smartphone, Sparkles, Globe, Layers } from "lucide-react";
 import Marquee from "./Marquee";
+import { useTilt } from "@/hooks/useTilt";
 
 const cards = [
   { icon: Monitor, title: "PIXEL-PERFECT UI DEVELOPMENT", desc: "I turn your Figma, XD, or Sketch designs into flawless React components — exact spacing, exact typography, exact interactions. Nothing approximate.", num: "01", area: "a" },
@@ -16,6 +17,52 @@ const cards = [
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
+const serviceCardVariants = {
+  hidden: { opacity: 0, y: 60, rotateX: 10 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    rotateX: 0,
+    transition: {
+      delay: i * 0.12,
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1]
+    }
+  })
+};
+
+// Tilt card component with 3D hover effect
+const TiltCard = ({ card, Icon, variants, index }: {
+  card: typeof cards[0];
+  Icon: any;
+  variants: any;
+  index: number;
+}) => {
+  const { ref, style, onMouseMove, onMouseLeave } = useTilt();
+
+  return (
+    <motion.div
+      ref={ref}
+      style={style}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-50px" }}
+      variants={variants}
+      custom={index}
+      className="brutalist-card bg-surface border border-foreground/[0.04] p-6 md:p-8 relative group"
+    >
+      <div className="flex items-start justify-between mb-6">
+        <Icon size={28} className="text-primary transition-all group-hover:drop-shadow-[0_0_8px_hsl(128,100%,46%,0.5)]" />
+        <span className="font-mono-label text-xs text-muted-foreground/40">{card.num}</span>
+      </div>
+      <h3 className="font-heading font-bold text-sm md:text-base text-foreground mb-3 tracking-wide">{card.title}</h3>
+      <p className="font-body text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
+    </motion.div>
+  );
 };
 
 const ServicesSection = () => {
@@ -41,18 +88,7 @@ const ServicesSection = () => {
           {cards.map((card, i) => {
             const Icon = card.icon;
             return (
-              <motion.div key={card.num}
-                initial="hidden" whileInView="visible" viewport={{ once: true }}
-                variants={fadeUp}
-                custom={i}
-                className="brutalist-card bg-surface border border-foreground/[0.04] p-6 md:p-8 relative group">
-                <div className="flex items-start justify-between mb-6">
-                  <Icon size={28} className="text-primary transition-all group-hover:drop-shadow-[0_0_8px_hsl(128,100%,46%,0.5)]" />
-                  <span className="font-mono-label text-xs text-muted-foreground/40">{card.num}</span>
-                </div>
-                <h3 className="font-heading font-bold text-sm md:text-base text-foreground mb-3 tracking-wide">{card.title}</h3>
-                <p className="font-body text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
-              </motion.div>
+              <TiltCard key={card.num} card={card} Icon={Icon} variants={serviceCardVariants} index={i} />
             );
           })}
         </div>

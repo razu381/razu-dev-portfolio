@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Syne, Space_Grotesk, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/providers";
+import PageTransition from "@/components/PageTransition";
+import NoiseTexture from "@/components/NoiseTexture";
+import ScrollProgress from "@/components/ScrollProgress";
 
 const fontDisplay = Syne({
   subsets: ["latin"],
@@ -42,7 +45,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${fontDisplay.variable} ${fontHeading.variable} ${fontBody.variable} ${fontMonoLabel.variable}`}>
       <body className="font-body">
-        <Providers>{children}</Providers>
+        <ScrollProgress />
+        <NoiseTexture />
+        <PageTransition>{children}</PageTransition>
       </body>
     </html>
   );

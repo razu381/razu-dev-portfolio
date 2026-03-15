@@ -4,6 +4,7 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -17,6 +18,31 @@ const Navbar = () => {
     { label: "REVIEWS", href: isHome ? "#reviews" : "/#reviews" },
     { label: "CONTACT", href: isHome ? "#contact" : "/#contact" },
   ];
+
+  // Staggered menu variants
+  const menuVariants = {
+    closed: {
+      opacity: 0,
+      transition: {
+        staggerChildren: 0.05,
+        staggerDirection: -1,
+        duration: 0.2
+      }
+    },
+    open: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.1,
+        duration: 0.3
+      }
+    }
+  };
+
+  const itemVariants = {
+    closed: { x: 50, opacity: 0 },
+    open: { x: 0, opacity: 1 }
+  };
 
   return (
     <>
@@ -55,31 +81,52 @@ const Navbar = () => {
       </nav>
 
       {/* Mobile overlay */}
-      {open && (
-        <div className="fixed inset-0 z-[60] bg-background flex flex-col items-center justify-center gap-10">
-          <button onClick={() => setOpen(false)} className="absolute top-5 right-6 text-foreground" aria-label="Close">
-            <X size={28} />
-          </button>
-          {navLinks.map(l => {
-            const isRouterLink = l.href.startsWith("/") && !l.href.startsWith("/#");
-            return isRouterLink ? (
-              <Link key={l.label} href={l.href} onClick={() => setOpen(false)}
-                className="font-display font-extrabold text-4xl text-foreground hover:text-primary transition-colors">
-                {l.label}
-              </Link>
-            ) : (
-              <a key={l.label} href={l.href} onClick={() => setOpen(false)}
-                className="font-display font-extrabold text-4xl text-foreground hover:text-primary transition-colors">
-                {l.label}
-              </a>
-            );
-          })}
-          <a href={isHome ? "#contact" : "/#contact"} onClick={() => setOpen(false)}
-            className="font-heading font-bold bg-primary text-primary-foreground px-8 py-3 text-lg mt-4">
-            HIRE ME →
-          </a>
-        </div>
-      )}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial="closed"
+            animate="open"
+            exit="closed"
+            variants={menuVariants}
+            className="fixed inset-0 z-[60] bg-background flex flex-col items-center justify-center gap-10"
+          >
+            <motion.button
+              variants={itemVariants}
+              onClick={() => setOpen(false)}
+              className="absolute top-5 right-6 text-foreground"
+              aria-label="Close"
+            >
+              <X size={28} />
+            </motion.button>
+            {navLinks.map((l, i) => {
+              const isRouterLink = l.href.startsWith("/") && !l.href.startsWith("/#");
+              return isRouterLink ? (
+                <motion.div key={l.label} variants={itemVariants} custom={i}>
+                  <Link href={l.href} onClick={() => setOpen(false)}
+                    className="font-display font-extrabold text-4xl text-foreground hover:text-primary transition-colors">
+                    {l.label}
+                  </Link>
+                </motion.div>
+              ) : (
+                <motion.div key={l.label} variants={itemVariants} custom={i}>
+                  <a href={l.href} onClick={() => setOpen(false)}
+                    className="font-display font-extrabold text-4xl text-foreground hover:text-primary transition-colors">
+                    {l.label}
+                  </a>
+                </motion.div>
+              );
+            })}
+            <motion.a
+              variants={itemVariants}
+              href={isHome ? "#contact" : "/#contact"}
+              onClick={() => setOpen(false)}
+              className="font-heading font-bold bg-primary text-primary-foreground px-8 py-3 text-lg mt-4"
+            >
+              HIRE ME →
+            </motion.a>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

@@ -1,11 +1,80 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { useEffect, useState } from "react";
 import Marquee from "./Marquee";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1, duration: 0.6 } }),
+};
+
+// Text scramble component for premium effect
+const TextScramble = ({ text, className }: { text: string; className?: string }) => {
+  const [displayedText, setDisplayedText] = useState(text);
+
+  useEffect(() => {
+    let iterations = 0;
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const interval = setInterval(() => {
+      setDisplayedText((prev) =>
+        prev
+          .split("")
+          .map((char, index) => {
+            if (index < iterations / 3) return text[index];
+            return characters[Math.floor(Math.random() * characters.length)];
+          })
+          .join("")
+      );
+
+      iterations += 1 / 3;
+
+      if (iterations >= text.length * 3) {
+        clearInterval(interval);
+        setDisplayedText(text);
+      }
+    }, 30);
+
+    return () => clearInterval(interval);
+  }, [text]);
+
+  return <span className={className}>{displayedText}</span>;
+};
+
+// Magnetic button component for premium feel
+const MagneticButton = ({ children, className, href }: { children: React.ReactNode; className?: string; href: string }) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const springConfig = { damping: 25, stiffness: 150 };
+  const springX = useSpring(x, springConfig);
+  const springY = useSpring(y, springConfig);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = (e.target as HTMLElement).getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    x.set(e.clientX - centerX);
+    y.set(e.clientY - centerY);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.a
+      href={href}
+      className={className}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ x: springX, y: springY }}
+    >
+      {children}
+    </motion.a>
+  );
 };
 
 const HeroSection = () => {
@@ -45,7 +114,11 @@ const HeroSection = () => {
                 <span className="block text-3xl md:text-4xl text-foreground">HI, I AM</span>
                 <span className="block text-foreground" style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}>SHOHIDUL</span>
                 <span className="block text-foreground" style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}>ISLAM</span>
-                <span className="block text-primary" style={{ fontSize: "clamp(3.5rem, 10vw, 9rem)" }}>RAZU.</span>
+                <TextScramble
+                  text="RAZU"
+                  className="block text-primary"
+                  style={{ fontSize: "clamp(3.5rem, 10vw, 9rem)" }}
+                />
               </h1>
             </motion.div>
 
@@ -72,26 +145,52 @@ const HeroSection = () => {
 
             {/* CTAs */}
             <motion.div custom={4} variants={fadeUp} className="flex flex-wrap gap-4 mt-10">
-              <a href="#projects"
-                className="font-heading font-bold text-sm bg-primary text-primary-foreground px-8 py-3.5 hover:brightness-110 transition-all inline-block">
+              <MagneticButton
+                href="#projects"
+                className="font-heading font-bold text-sm bg-primary text-primary-foreground px-8 py-3.5 hover:brightness-110 transition-all inline-block"
+              >
                 VIEW MY WORK
-              </a>
-              <a href="#contact"
-                className="font-heading font-bold text-sm border border-primary text-primary px-8 py-3.5 hover:bg-primary/10 transition-all inline-block">
+              </MagneticButton>
+              <MagneticButton
+                href="#contact"
+                className="font-heading font-bold text-sm border border-primary text-primary px-8 py-3.5 hover:bg-primary/10 transition-all inline-block"
+              >
                 BOOK A ZOOM →
-              </a>
+              </MagneticButton>
             </motion.div>
           </motion.div>
         </div>
 
         {/* Right photo — 45% */}
-        <div className="relative w-full lg:w-[45%] min-h-[50vh] lg:min-h-screen">
-          <div className="absolute inset-0 flex items-center justify-center"
-            style={{ background: "linear-gradient(135deg, #111 0%, #0d1a10 100%)" }}>
-            <span className="font-mono-label text-sm text-muted-foreground tracking-wider">[ ADD YOUR PHOTO HERE ]</span>
+        <div className="relative w-full lg:w-[45%] min-h-[50vh] lg:min-h-screen overflow-hidden">
+          {/* Image */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <picture>
+              <source
+                srcSet="/shohidul-islam-razu.jpg?w=600&h=750 600w,
+                        /shohidul-islam-razu.jpg?w=800&h=1000 800w,
+                        /shohidul-islam-razu.jpg?w=1200&h=1500 1200w"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 45vw"
+              />
+              <img
+                src="/shohidul-islam-razu.jpg"
+                alt="Shohidul Islam Razu - Frontend Developer"
+                className="w-full h-full object-cover"
+                style={{ filter: "brightness(0.85) contrast(1.15) saturate(0.85)" }}
+                loading="eager"
+                fetchPriority="high"
+              />
+            </picture>
           </div>
+          {/* Green tint overlay */}
+          <div
+            className="absolute inset-0"
+            style={{ background: "radial-gradient(circle at 30% 50%, rgba(0, 255, 0, 0.03) 0%, transparent 50%)" }}
+          />
           {/* Left gradient overlay */}
-          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-background to-transparent z-10" />
+          <div className="absolute inset-y-0 left-0 w-32 md:w-48 bg-gradient-to-r from-background via-background/80 to-transparent z-10" />
+          {/* Bottom gradient overlay */}
+          <div className="absolute inset-x-0 bottom-0 h-24 md:h-32 bg-gradient-to-t from-background via-background/60 to-transparent z-10" />
         </div>
       </div>
 

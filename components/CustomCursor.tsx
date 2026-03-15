@@ -23,13 +23,13 @@ const CustomCursor = () => {
       mouseY = e.clientY;
       dot.style.left = `${mouseX}px`;
       dot.style.top = `${mouseY}px`;
-      
+
       // Update glow based on element under cursor (using ref to avoid re-renders)
       const target = e.target as HTMLElement;
       const interactiveElement = target.closest('a, button, input, textarea, select, [role="button"]');
       const wasHovering = isHoveringRef.current;
       isHoveringRef.current = !!interactiveElement;
-      
+
       // Only update DOM when hover state actually changes
       if (wasHovering !== isHoveringRef.current) {
         if (isHoveringRef.current) {
@@ -62,13 +62,13 @@ const CustomCursor = () => {
 
   return (
     <>
-      <div 
-        ref={dotRef} 
-        className="cursor-dot hidden md:block" 
+      <div
+        ref={dotRef}
+        className="cursor-dot hidden md:block"
       />
-      <div 
-        ref={ringRef} 
-        className="cursor-ring hidden md:block" 
+      <div
+        ref={ringRef}
+        className="cursor-ring hidden md:block"
       />
     </>
   );
