@@ -68,6 +68,12 @@ const TiltCard = ({ card, Icon, variants, index }: {
 const ServicesSection = () => {
   return (
     <section id="services" className="relative py-24 md:py-32 px-6 md:px-10 lg:px-20 overflow-hidden">
+      {/* Vertical label */}
+      <div className="hidden lg:block absolute left-6 top-32 font-mono-label text-xs text-primary tracking-[0.2em] uppercase"
+        style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}>
+        [ 02 — SERVICES ]
+      </div>
+
       <Marquee text="WHAT I DO · WHAT I DO · WHAT I DO ·" />
 
       {/* Ghost text */}

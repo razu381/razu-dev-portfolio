@@ -84,6 +84,12 @@ const ProjectsSection = () => {
 
   return (
     <section id="projects" className="relative py-24 md:py-32 overflow-hidden">
+      {/* Vertical label */}
+      <div className="hidden lg:block absolute left-6 top-32 font-mono-label text-xs text-primary tracking-[0.2em] uppercase"
+        style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}>
+        [ 03 — WORK ]
+      </div>
+
       <Marquee text="SELECTED WORK · SELECTED WORK · SELECTED WORK ·" />
 
       {/* Ghost text */}

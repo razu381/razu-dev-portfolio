@@ -49,6 +49,12 @@ const ContactSection = () => {
 
   return (
     <section id="contact" className="relative py-24 md:py-32 overflow-hidden">
+      {/* Vertical label */}
+      <div className="hidden lg:block absolute left-6 top-32 font-mono-label text-xs text-primary tracking-[0.2em] uppercase"
+        style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}>
+        [ 06 — CONTACT ]
+      </div>
+
       <Marquee text="LET'S BUILD · LET'S BUILD · LET'S BUILD ·" />
 
       {/* Ghost text */}

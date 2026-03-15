@@ -32,6 +32,12 @@ const fadeUp = {
 const ReviewsSection = () => {
   return (
     <section id="reviews" className="relative py-24 md:py-32 overflow-hidden" style={{ background: "#0a0a0a" }}>
+      {/* Vertical label */}
+      <div className="hidden lg:block absolute left-6 top-32 font-mono-label text-xs text-primary tracking-[0.2em] uppercase"
+        style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}>
+        [ 05 — REVIEWS ]
+      </div>
+
       <Marquee
         text="CLIENT LOVE · 50+ PROJECTS SHIPPED · 19 COUNTRIES · 4 YEARS · CLIENT LOVE ·"
         highlightWords={["50+", "CLIENT LOVE"]}
