@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Monitor, Zap, Smartphone, Sparkles, Globe, Layers } from "lucide-react";
-import Marquee from "./Marquee";
+import Marquee from "../shared/Marquee";
 import { useTilt } from "@/hooks/useTilt";
 
 const cards = [
@@ -28,18 +28,18 @@ const serviceCardVariants = {
     transition: {
       delay: i * 0.12,
       duration: 0.6,
-      ease: [0.22, 1, 0.36, 1]
+      ease: [0.22, 1, 0.36, 1] as const
     }
   })
-};
+} as const;
 
 // Tilt card component with 3D hover effect
 const TiltCard = ({ card, Icon, variants, index }: {
   card: typeof cards[0];
-  Icon: any;
-  variants: any;
+  Icon: React.ComponentType<{ size?: number | string; className?: string }>;
+  variants: typeof serviceCardVariants;
   index: number;
-}) => {
+}): JSX.Element => {
   const { ref, style, onMouseMove, onMouseLeave } = useTilt();
 
   return (

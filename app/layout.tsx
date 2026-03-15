@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { Syne, Space_Grotesk, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { Providers } from "@/components/providers";
-import PageTransition from "@/components/PageTransition";
-import NoiseTexture from "@/components/NoiseTexture";
-import ScrollProgress from "@/components/ScrollProgress";
+import PageTransition from "@/components/shared/PageTransition";
+import NoiseTexture from "@/components/shared/NoiseTexture";
+import ScrollProgress from "@/components/shared/ScrollProgress";
 
 const fontDisplay = Syne({
   subsets: ["latin"],

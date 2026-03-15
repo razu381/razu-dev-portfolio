@@ -1,15 +1,15 @@
-import CustomCursor from "@/components/CustomCursor";
-import Navbar from "@/components/Navbar";
-import HeroSection from "@/components/HeroSection";
-import AboutSection from "@/components/AboutSection";
-import ServicesSection from "@/components/ServicesSection";
-import ProjectsSection from "@/components/ProjectsSection";
-import BlogPreviewSection from "@/components/BlogPreviewSection";
-import ReviewsSection from "@/components/ReviewsSection";
-import ContactSection from "@/components/ContactSection";
-import Footer from "@/components/Footer";
-import QuoteBanner from "@/components/QuoteBanner";
-import DiagonalDivider from "@/components/DiagonalDivider";
+import CustomCursor from "@/components/shared/CustomCursor";
+import Navbar from "@/components/shared/Navbar";
+import HeroSection from "@/components/hero/HeroSection";
+import AboutSection from "@/components/about/AboutSection";
+import ServicesSection from "@/components/services/ServicesSection";
+import ProjectsSection from "@/components/projects/ProjectsSection";
+import BlogPreviewSection from "@/components/blog/BlogPreviewSection";
+import ReviewsSection from "@/components/reviews/ReviewsSection";
+import ContactSection from "@/components/contact/ContactSection";
+import Footer from "@/components/shared/Footer";
+import QuoteBanner from "@/components/shared/QuoteBanner";
+import DiagonalDivider from "@/components/shared/DiagonalDivider";
 
 export default function Home() {
   return (

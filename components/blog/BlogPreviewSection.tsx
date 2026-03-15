@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Marquee from "./Marquee";
+import Marquee from "../shared/Marquee";
 import { posts } from "@/data/posts";
 
 const fadeUp = {

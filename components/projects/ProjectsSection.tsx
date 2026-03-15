@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import Marquee from "./Marquee";
+import Marquee from "../shared/Marquee";
 import { useTilt } from "@/hooks/useTilt";
 import { useRef } from "react";
 
@@ -21,10 +21,10 @@ const fadeUp = {
 // Project card with 3D tilt effect
 const ProjectCard = ({ project, variants, index, isMobile }: {
   project: typeof projects[0];
-  variants: any;
+  variants: typeof fadeUp;
   index: number;
   isMobile?: boolean;
-}) => {
+}): JSX.Element => {
   const { ref, style, onMouseMove, onMouseLeave } = useTilt();
   const imageRef = useRef<HTMLDivElement>(null);
 

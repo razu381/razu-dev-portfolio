@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { MapPin, Mail, Phone, Star } from "lucide-react";
-import Marquee from "./Marquee";
+import Marquee from "../shared/Marquee";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },

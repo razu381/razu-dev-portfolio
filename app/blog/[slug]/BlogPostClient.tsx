@@ -4,10 +4,10 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import CustomCursor from "@/components/CustomCursor";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import Marquee from "@/components/Marquee";
+import CustomCursor from "@/components/shared/CustomCursor";
+import Navbar from "@/components/shared/Navbar";
+import Footer from "@/components/shared/Footer";
+import Marquee from "@/components/shared/Marquee";
 import { type Post, type ContentBlock } from "@/data/posts";
 
 const fadeUp = {

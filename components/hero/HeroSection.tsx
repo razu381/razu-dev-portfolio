@@ -2,7 +2,7 @@
 
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
-import Marquee from "./Marquee";
+import Marquee from "../shared/Marquee";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },

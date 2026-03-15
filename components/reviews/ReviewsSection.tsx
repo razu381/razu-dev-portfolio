@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Marquee from "./Marquee";
+import Marquee from "../shared/Marquee";
 
 const textReviews = [
   {
