@@ -83,7 +83,7 @@ const ProjectCard = ({ project, variants, index, isMobile }: {
 const ProjectsSection = () => {
 
   return (
-    <section id="projects" className="relative py-12 md:py-16 overflow-hidden">
+    <section id="projects" className="relative py-24 md:py-32 overflow-hidden">
       <Marquee text="SELECTED WORK · SELECTED WORK · SELECTED WORK ·" />
 
       {/* Ghost text */}
