@@ -46,7 +46,7 @@ const ReviewsSection = () => {
       {/* Ghost text */}
       <div
         className="absolute top-24 left-0 right-0 text-center font-display font-extrabold text-stroke select-none"
-        style={{ fontSize: "clamp(4rem, 14vw, 14rem)", lineHeight: 1 }}>
+        style={{ fontSize: "clamp(5rem, 18vw, 18rem)", lineHeight: 1 }}>
         REVIEWS
       </div>
 
