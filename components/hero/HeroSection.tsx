@@ -82,13 +82,7 @@ const HeroSection = () => {
     <section id="hero" className="relative min-h-screen overflow-hidden noise-overlay clip-diagonal-bottom">
       <div className="relative z-10 flex flex-col lg:flex-row min-h-screen">
             {/* Left content — 55% */}
-            <div className="relative w-full lg:w-[60%] flex flex-col justify-center px-6 md:px-16 lg:px-20 py-24 lg:py-0">
-              {/* Ghost outline RAZU */}
-              <div
-                className="absolute top-10 left-0 font-display font-extrabold text-stroke-accent select-none"
-                style={{ fontSize: "clamp(8rem, 15vw, 20rem)", lineHeight: 0.85 }}>
-                RAZU
-              </div>
+            <div className="relative w-full lg:w-[60%] flex flex-col justify-center px-6 md:px-16 lg:px-20 py-24 lg:py-0">              
 
               {/* Vertical spine */}
               <div className="hidden lg:flex absolute left-6 top-1/2 -translate-y-1/2 flex-col items-center gap-4">

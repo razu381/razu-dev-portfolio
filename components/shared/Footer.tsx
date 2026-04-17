@@ -67,7 +67,7 @@ const Footer = () => {
 
       {/* Giant name */}
       <div
-        className={`text-center font-display font-extrabold text-stroke-faint select-none leading-none ${isVisible ? 'visible' : ''}`}
+        className={`text-center font-display font-extrabold text-stroke-faint select-none leading-none`}
         style={{ fontSize: "clamp(4rem, 10vw, 12rem)" }}>
         SHOHIDUL ISLAM RAZU
       </div>
