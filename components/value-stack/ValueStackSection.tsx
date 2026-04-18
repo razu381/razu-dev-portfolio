@@ -126,32 +126,34 @@ const ValueStackSection = ({ data }: { data: ValueStackData }) => {
         </div>
 
         <div className="mt-12 lg:mt-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {data.checklist.map((item, i) => (
-              <motion.div
-                key={i}
-                custom={i}
-                variants={rowVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="brutalist-card bg-surface border border-foreground/[0.04] p-6 relative group"
-              >
-                <div className="flex items-start justify-between mb-3">
-                  <span className="font-mono-label text-primary text-sm">✓</span>
-                  {item.badge && (
-                    <span className="font-mono-label text-xs px-3 py-1 bg-surface-alt border border-primary/25 text-primary tracking-wider uppercase">
-                      {item.badge}
-                    </span>
-                  )}
-                </div>
-                <p className="font-body text-sm text-foreground leading-relaxed">
+          {data.checklist.map((item, i) => (
+            <motion.div
+              key={i}
+              custom={i}
+              variants={rowVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="flex items-center justify-between py-5 border-b border-foreground/[0.04] group transition-colors duration-200 hover:bg-surface"
+              style={{
+                borderTop: i === 0 ? "1px solid #1A1A1A" : undefined,
+                borderBottom: "1px solid #1A1A1A",
+              }}
+            >
+              <div className="flex items-center gap-4 min-w-0">
+                <span className="font-mono-label text-primary text-sm shrink-0">✓</span>
+                <p className="font-body text-sm md:text-base text-foreground leading-relaxed">
                   {item.text}
                   {item.bold && <span className="font-bold">{item.bold}</span>}
                 </p>
-              </motion.div>
-            ))}
-          </div>
+              </div>
+              {item.badge && (
+                <span className="font-mono-label font-bold text-[11px] text-primary uppercase tracking-[0.12em] px-3 py-[5px] shrink-0 ml-4 border border-primary/30 bg-transparent">
+                  {item.badge}
+                </span>
+              )}
+            </motion.div>
+          ))}
         </div>
 
         <motion.div
@@ -163,22 +165,22 @@ const ValueStackSection = ({ data }: { data: ValueStackData }) => {
         >
           <motion.div
             variants={fadeUp}
-            className="bg-surface-alt border-l-[3px] border-l-primary p-6 md:p-8"
+            className="bg-surface-alt border-l-[3px] border-l-primary p-6 md:p-8 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8"
           >
-            <p className="font-heading font-bold text-foreground leading-[1.5]" style={{ fontSize: "clamp(1.1rem, 1.8vw, 1.35rem)" }}>
-              {data.riskReversal.split("\n").map((line, i) => (
-                <span key={i} className="block">{line}</span>
-              ))}
-            </p>
-            <p className="font-body text-[13px] text-muted-foreground italic mt-4 leading-[1.6]">
-              {data.supportingLine}
-            </p>
-          </motion.div>
+            <div>
+              <p className="font-heading font-bold text-foreground leading-[1.5]" style={{ fontSize: "clamp(1.1rem, 1.8vw, 1.35rem)" }}>
+                {data.riskReversal.split("\n").map((line, i) => (
+                  <span key={i} className="block">{line}</span>
+                ))}
+              </p>
+              <p className="font-body text-[13px] text-muted-foreground italic mt-4 leading-[1.6] max-w-lg">
+                {data.supportingLine}
+              </p>
+            </div>
 
-          <motion.div variants={fadeUp} className="mt-8">
             <a
               href={data.cta.href}
-              className="inline-block font-heading font-bold text-sm bg-primary text-primary-foreground px-8 py-3.5 hover:brightness-110 transition-all"
+              className="shrink-0 inline-block font-heading font-bold text-sm bg-primary text-primary-foreground px-8 py-3.5 hover:brightness-110 transition-all"
               style={{ boxShadow: "0 0 0 0 transparent" }}
               onMouseEnter={(e) => (e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,234,28,0.2)")}
               onMouseLeave={(e) => (e.currentTarget.style.boxShadow = "0 0 0 0 transparent")}
