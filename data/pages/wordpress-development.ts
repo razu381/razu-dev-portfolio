@@ -115,6 +115,24 @@ export const wordpressData: PageData = {
     introLine:
       "This is what every premium client gets. Not an upsell menu — just the standard.",
     headline: "Most developers charge extra for this.\nIt's all included.",
+    stepsLabel: "HOW IT WORKS",
+    steps: [
+      {
+        number: "01",
+        title: "Free Mockup First",
+        body: "We talk. I understand your business and what a successful site looks like for you. Then I build a free 3–4 section homepage concept. You approve the direction — or walk away. Zero obligation. No invoice. Nothing.",
+      },
+      {
+        number: "02",
+        title: "Build Together",
+        body: "You send your logo, content, and brand direction. I build the homepage first — we lock it in. Then the rest of the site, page by page, approved by you at every step.",
+      },
+      {
+        number: "03",
+        title: "Test & Launch",
+        body: "Before anything goes live, I run automated tests on your order and booking flow. You get a site that has been checked, not just built. Then we launch — and I'm here for 30 days after.",
+      },
+    ],
     checklist: [
       {
         text: "Free 3–4 section homepage mockup — ",
@@ -152,29 +170,6 @@ export const wordpressData: PageData = {
     supportingLine:
       "I only take projects I'm confident I can deliver. The mockup shows both of us if we're the right fit — before either of us commits.",
     cta: { label: "Get Your Free Homepage Design →", href: "#contact" },
-  },
-
-  process: {
-    sectionLabel: "HOW IT WORKS",
-    headline: "You see it before you buy it.",
-    steps: [
-      {
-        number: "01",
-        title: "Free Mockup First",
-        body: "We talk. I understand your business, your customers, and what a successful site looks like for you. Then I build a free 3–4 section homepage concept. You approve the direction — or walk away. Zero obligation. No invoice. Nothing.",
-      },
-      {
-        number: "02",
-        title: "Build Together",
-        body: "You send your logo, content, and brand direction. I build the homepage first — we lock it in. Then the rest of the site, page by page, approved by you at every step. No surprises.",
-      },
-      {
-        number: "03",
-        title: "Test & Launch",
-        body: "Before anything goes live, I run automated tests on your order and booking flow. You get a site that has been checked, not just built. Then we launch — and I'm still here for 30 days after.",
-      },
-    ],
-    closingLine: 'No ghost developers. No "it worked on my machine."',
   },
 
   projects: {

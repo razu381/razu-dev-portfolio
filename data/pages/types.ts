@@ -151,6 +151,8 @@ export interface ValueStackData {
   sectionLabel: string;
   introLine: string;
   headline: string;
+  stepsLabel: string;
+  steps: ProcessStep[];
   checklist: ValueStackCheckItem[];
   riskReversal: string;
   supportingLine: string;

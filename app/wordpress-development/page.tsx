@@ -5,7 +5,6 @@ import AboutSection from "@/components/about/AboutSection";
 import QuoteBanner from "@/components/shared/QuoteBanner";
 import ServicesSection from "@/components/services/ServicesSection";
 import ValueStackSection from "@/components/value-stack/ValueStackSection";
-import ProcessSection from "@/components/process/ProcessSection";
 import ProjectsSection, { ProjectSidebar } from "@/components/projects/ProjectsSection";
 import ReviewsSection from "@/components/reviews/ReviewsSection";
 import ContactSection from "@/components/contact/ContactSection";
@@ -39,7 +38,6 @@ export default function WordPressDevelopment() {
       {wordpressData.valueStack && (
         <ValueStackSection data={wordpressData.valueStack} />
       )}
-      <ProcessSection data={wordpressData.process} />
       <ProjectsSection data={wordpressData.projects} />
       <ProjectSidebar data={wordpressData.projects.projects} />
       <ReviewsSection data={wordpressData.reviews} />
