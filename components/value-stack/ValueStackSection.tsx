@@ -4,8 +4,6 @@ import { motion } from "framer-motion";
 import Marquee from "../shared/Marquee";
 import type { ValueStackData } from "@/data/pages/types";
 import ChecklistA from "./checklist/ChecklistA";
-import ChecklistB from "./checklist/ChecklistB";
-import ChecklistC from "./checklist/ChecklistC";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -21,10 +19,7 @@ const stepVariants = {
   }),
 };
 
-const ValueStackSection = ({ data, checklistStyle = "A" }: { data: ValueStackData; checklistStyle?: "A" | "B" | "C" }) => {
-  const checklistComponents = { A: ChecklistA, B: ChecklistB, C: ChecklistC };
-  const ChecklistComponent = checklistComponents[checklistStyle];
-
+const ValueStackSection = ({ data }: { data: ValueStackData }) => {
   return (
     <section
       className="relative py-24 md:py-32 px-6 md:px-10 lg:px-20 overflow-hidden"
@@ -57,8 +52,9 @@ const ValueStackSection = ({ data, checklistStyle = "A" }: { data: ValueStackDat
           [{data.bigNum}] {data.sectionLabel}
         </motion.p>
 
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
-          <div className="lg:w-[30%]">
+        <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-12 lg:gap-16">
+          {/* LEFT COLUMN - STICKY HEADLINE */}
+          <div className="lg:sticky lg:top-32 lg:self-start">
             <span
               className="font-display font-extrabold text-primary/15 select-none"
               style={{ fontSize: "8rem", lineHeight: 1 }}
@@ -77,18 +73,30 @@ const ValueStackSection = ({ data, checklistStyle = "A" }: { data: ValueStackDat
             </motion.div>
           </div>
 
-          <motion.div
-            className="lg:w-[70%]"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ staggerChildren: 0.15 }}
-          >
-            <motion.p variants={fadeUp} className="font-body text-muted-foreground mb-10">
-              {data.introLine}
-            </motion.p>
+          {/* RIGHT COLUMN - SCROLLING CONTENT */}
+          <div>
+            {/* CHECKLIST */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+              <ChecklistA items={data.checklist} />
+            </motion.div>
 
-            <motion.p variants={fadeUp} className="font-mono-label text-xs text-muted-foreground uppercase tracking-[0.15em] mb-8">
+            {/* THIN RULE */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4, duration: 0.5, ease: "easeOut" }}
+              className="h-px bg-[#1A1A1A] my-12 origin-left"
+            />
+
+            {/* PROCESS STEPS */}
+            <motion.p
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              className="font-mono-label text-xs text-muted-foreground uppercase tracking-[0.15em] mb-8"
+            >
               {data.stepsLabel}
             </motion.p>
 
@@ -114,19 +122,16 @@ const ValueStackSection = ({ data, checklistStyle = "A" }: { data: ValueStackDat
                 </p>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
 
-        <div className="mt-12 lg:mt-20">
-          <ChecklistComponent items={data.checklist} />
-        </div>
-
+        {/* RISK REVERSAL + CTA - FULL WIDTH */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           transition={{ staggerChildren: 0.1 }}
-          className="mt-12 lg:mt-20"
+          className="mt-16"
         >
           <motion.div
             variants={fadeUp}
