@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import Marquee from "../shared/Marquee";
 import type { ValueStackData } from "@/data/pages/types";
-import ChecklistA from "./checklist/ChecklistA";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -19,10 +18,20 @@ const stepVariants = {
   }),
 };
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 30, scale: 0.97 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { delay: i * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] as const },
+  }),
+};
+
 const ValueStackSection = ({ data }: { data: ValueStackData }) => {
   return (
     <section
-      className="relative py-24 md:py-32 px-6 md:px-10 lg:px-20 overflow-hidden"
+      className="relative py-24 md:py-32 px-6 md:px-10 lg:px-20"
       style={{ background: "#0a0a0a" }}
     >
       <div
@@ -34,11 +43,13 @@ const ValueStackSection = ({ data }: { data: ValueStackData }) => {
 
       <Marquee text={data.marquee.text} highlightWords={data.marquee.highlightWords} />
 
-      <div
-        className="absolute top-24 left-0 right-0 text-center font-display font-extrabold text-stroke select-none"
-        style={{ fontSize: "clamp(5rem, 18vw, 18rem)", lineHeight: 1 }}
-      >
-        {data.ghostText}
+      <div className="overflow-hidden">
+        <div
+          className="absolute top-24 left-0 right-0 text-center font-display font-extrabold text-stroke select-none pointer-events-none"
+          style={{ fontSize: "clamp(5rem, 18vw, 18rem)", lineHeight: 1 }}
+        >
+          {data.ghostText}
+        </div>
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto mt-16">
@@ -52,11 +63,11 @@ const ValueStackSection = ({ data }: { data: ValueStackData }) => {
           [{data.bigNum}] {data.sectionLabel}
         </motion.p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-12 lg:gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-12 lg:gap-16 items-start">
           {/* LEFT COLUMN - STICKY HEADLINE */}
-          <div className="lg:sticky lg:top-32 lg:self-start">
+          <div className="lg:sticky lg:top-32">
             <span
-              className="font-display font-extrabold text-primary/15 select-none"
+              className="font-display font-extrabold text-primary/15 select-none block"
               style={{ fontSize: "8rem", lineHeight: 1 }}
             >
               {data.bigNum}
@@ -75,10 +86,41 @@ const ValueStackSection = ({ data }: { data: ValueStackData }) => {
 
           {/* RIGHT COLUMN - SCROLLING CONTENT */}
           <div>
-            {/* CHECKLIST */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-              <ChecklistA items={data.checklist} />
-            </motion.div>
+            {/* CHECKLIST - NUMBERED CARDS */}
+            <div className="space-y-4">
+              {data.checklist.map((item, i) => {
+                const num = String(i + 1).padStart(2, "0");
+                return (
+                  <motion.div
+                    key={i}
+                    custom={i}
+                    variants={cardVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    className="brutalist-card bg-surface border border-foreground/[0.04] p-6 relative group"
+                  >
+                    <div className="flex items-start justify-between mb-3">
+                      <span
+                        className="font-mono-label font-bold text-primary/20 select-none"
+                        style={{ fontSize: "2.5rem", lineHeight: 1, letterSpacing: "-0.03em" }}
+                      >
+                        {num}
+                      </span>
+                      {item.badge && (
+                        <span className="font-mono-label font-bold text-[10px] text-primary uppercase tracking-[0.12em] px-2 py-[3px] border border-primary/25 bg-transparent shrink-0">
+                          {item.badge}
+                        </span>
+                      )}
+                    </div>
+                    <p className="font-body text-sm text-foreground leading-relaxed">
+                      {item.text}
+                      {item.bold && <span className="font-bold">{item.bold}</span>}
+                    </p>
+                  </motion.div>
+                );
+              })}
+            </div>
 
             {/* THIN RULE */}
             <motion.div
