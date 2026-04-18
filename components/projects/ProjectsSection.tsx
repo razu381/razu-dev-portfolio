@@ -131,11 +131,10 @@ const ProjectButton = ({ number, index, activeIndex, onClick }: {
 
   return (
     <button
-      className={`flex-1 flex items-center justify-center transition-all duration-150 border-b border-zinc-700 ${
-        isActive 
-          ? 'bg-primary text-primary-foreground border-primary' 
-          : 'bg-green-950/30 text-primary/70 hover:bg-green-950/60 hover:text-primary'
-      }`}
+      className={`flex-1 flex items-center justify-center transition-all duration-150 border-b border-zinc-700 ${isActive
+        ? 'bg-primary text-primary-foreground border-primary'
+        : 'bg-green-950/30 text-primary/70 hover:bg-green-950/60 hover:text-primary'
+        }`}
       onClick={() => onClick(index)}
     >
       <span
@@ -155,11 +154,12 @@ const ProjectPanel = ({ project, isActive }: {
   project: Project;
   isActive: boolean;
 }) => {
+  const { ref, style, onMouseMove, onMouseLeave } = useTilt();
+
   return (
     <div
-      className={`flex gap-8 transition-opacity duration-150 ${
-        isActive ? 'opacity-100 flex' : 'opacity-0 hidden'
-      }`}
+      className={`flex-1 gap-12 lg:gap-16 transition-opacity duration-300 ${isActive ? 'opacity-100 flex flex-col md:flex-row md:items-center' : 'opacity-0 hidden'
+        }`}
     >
       {/* Left Content */}
       <div className="flex-1">
@@ -201,24 +201,46 @@ const ProjectPanel = ({ project, isActive }: {
         </button>
       </div>
 
-      {/* Right Image */}
-      <div className="flex-1 max-w-[500px]">
-        <motion.div 
-          className="aspect-[4/3] md:aspect-video w-full border border-border bg-no-repeat"
-          style={{ 
-            backgroundImage: `url('/home-cannaware-shop.png')`,
-            backgroundSize: "100% auto"
-          }}
-          initial={{ backgroundPositionY: "0%" }}
-          whileInView={{ backgroundPositionY: "100%" }}
-          viewport={{ once: false }}
-          transition={{
-            duration: 15,
-            ease: "linear",
-            repeat: Infinity,
-            repeatType: "reverse"
-          }}
-        />
+      {/* Right Image (3D Floating Glass Plate) */}
+      <div className="flex-1 flex justify-center items-center relative min-h-[400px]">
+        {/* Ambient Blurred Backdrop */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="w-[60%] h-[60%] bg-primary/20 rounded-full blur-[100px]" />
+        </div>
+
+        {/* 3D Tilt Container */}
+        <motion.div
+          ref={ref}
+          style={{ ...style }}
+          onMouseMove={onMouseMove}
+          onMouseLeave={onMouseLeave}
+          className="relative w-full max-w-[400px] aspect-[4/5] border border-white/10 bg-white/[0.02] backdrop-blur-xl rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(0,234,28,0.1)] z-10 flex flex-col cursor-crosshair"
+        >
+          {/* Subtle Browser Header */}
+          <div className="h-10 border-b border-white/10 bg-black/40 flex items-center px-4 gap-2.5 shrink-0 backdrop-blur-md">
+            <div className="w-2.5 h-2.5 rounded-full bg-white/20" />
+            <div className="w-2.5 h-2.5 rounded-full bg-white/20" />
+            <div className="w-2.5 h-2.5 rounded-full bg-white/20" />
+          </div>
+          
+          {/* Scrolling Image */}
+          <motion.div
+            className="w-full flex-1 bg-no-repeat"
+            style={{
+              backgroundImage: `url('/home-cannaware-shop.png')`,
+              backgroundSize: "100% auto",
+            }}
+            initial={{ backgroundPositionY: "0%" }}
+            whileInView={{ backgroundPositionY: "100%" }}
+            viewport={{ once: false }}
+            transition={{
+              duration: 15,
+              ease: "linear",
+              repeat: Infinity,
+              repeatType: "reverse"
+            }}
+          />
+        </motion.div>
       </div>
     </div>
   );
@@ -231,7 +253,7 @@ export const ProjectSidebar = ({ data }: { data: Project[] }) => {
     <section
       id="concept-03-work"
       className="bg-background pb-20 w-full"
-    >      
+    >
 
       {/* Main layout */}
       <div className="px-6 md:px-12 lg:px-20">
@@ -250,7 +272,7 @@ export const ProjectSidebar = ({ data }: { data: Project[] }) => {
           </div>
 
           {/* Right Content Area */}
-          <div className="flex-1 p-8 md:p-12 relative">
+          <div className="flex-1 pl-8 md:pl-12 relative flex flex-col">
             {data.map((project, index) => (
               <ProjectPanel
                 key={project.id}
