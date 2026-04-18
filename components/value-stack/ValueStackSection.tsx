@@ -63,7 +63,7 @@ const ValueStackSection = ({ data }: { data: ValueStackData }) => {
           [{data.bigNum}] {data.sectionLabel}
         </motion.p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-12 lg:gap-16">
           {/* LEFT COLUMN - STICKY HEADLINE */}
           <div className="lg:sticky lg:top-32">
             <span
