@@ -4,7 +4,9 @@ import HeroSection from "@/components/hero/HeroSection";
 import AboutSection from "@/components/about/AboutSection";
 import QuoteBanner from "@/components/shared/QuoteBanner";
 import ServicesSection from "@/components/services/ServicesSection";
-import ValueStackSection from "@/components/value-stack/ValueStackSection";
+import ValueStackOption1 from "@/components/value-stack/ValueStackOption1";
+import ValueStackOption2 from "@/components/value-stack/ValueStackOption2";
+import ValueStackOption3 from "@/components/value-stack/ValueStackOption3";
 import ProcessSection from "@/components/process/ProcessSection";
 import ProjectsSection, { ProjectSidebar } from "@/components/projects/ProjectsSection";
 import ReviewsSection from "@/components/reviews/ReviewsSection";
@@ -24,6 +26,19 @@ export const metadata = {
   },
 };
 
+function OptionLabel({ number, name }: { number: number; name: string }) {
+  return (
+    <div
+      className="w-full py-4 px-6 md:px-10 lg:px-20 text-center"
+      style={{ background: "#111111", borderBottom: "2px solid #00EB1C" }}
+    >
+      <span className="font-mono-label font-bold text-sm text-primary tracking-[0.15em] uppercase">
+        OPTION {number} — {name}
+      </span>
+    </div>
+  );
+}
+
 export default function WordPressDevelopment() {
   return (
     <>
@@ -36,7 +51,16 @@ export default function WordPressDevelopment() {
         highlight={wordpressData.quoteBanner.highlight}
       />
       <ServicesSection data={wordpressData.services} />
-      <ValueStackSection data={wordpressData.valueStack} />
+      {!wordpressData.valueStack ? null : (
+        <>
+          <OptionLabel number={1} name="Terminal / Spec Sheet" />
+          <ValueStackOption1 data={wordpressData.valueStack} />
+          <OptionLabel number={2} name="Two-Column Split" />
+          <ValueStackOption2 data={wordpressData.valueStack} />
+          <OptionLabel number={3} name="Numbered Rows with Badges" />
+          <ValueStackOption3 data={wordpressData.valueStack} />
+        </>
+      )}
       <ProcessSection data={wordpressData.process} />
       <ProjectsSection data={wordpressData.projects} />
       <ProjectSidebar data={wordpressData.projects.projects} />

@@ -144,6 +144,7 @@ export interface QuoteBannerData {
 export interface ValueStackCheckItem {
   text: string;
   bold?: string;
+  badge?: string;
 }
 
 export interface ValueStackData {

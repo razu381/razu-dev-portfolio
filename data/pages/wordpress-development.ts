@@ -119,30 +119,36 @@ export const wordpressData: PageData = {
       {
         text: "Free 3–4 section homepage mockup — ",
         bold: "before you sign anything",
+        badge: "FREE",
       },
       {
         text: "Revisions until you're proud to share it — ",
         bold: "no cap, no extra invoices",
+        badge: "NO CAP",
       },
       {
         text: "30-day bug fix after launch — ",
         bold: "free",
+        badge: "FREE",
       },
       {
         text: "Speed & security hardening — ",
         bold: "included on every project",
+        badge: "INCLUDED",
       },
       {
         text: "Automated backup system — ",
         bold: "included",
+        badge: "INCLUDED",
       },
       {
         text: "On-page SEO structure (titles, schema, sitemap) — ",
         bold: "included",
+        badge: "INCLUDED",
       },
     ],
     riskReversal:
-      "You see the homepage design before you pay a cent. If you don't love the direction, walk away. No invoice. No awkward email. Nothing.",
+      "You see the homepage design before you pay a cent.\nIf you don't love the direction, walk away.\nNo invoice. No awkward email. Nothing.",
     supportingLine:
       "I only take projects I'm confident I can deliver. The mockup shows both of us if we're the right fit — before either of us commits.",
     cta: { label: "Get Your Free Homepage Design →", href: "#contact" },
