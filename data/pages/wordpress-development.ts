@@ -53,8 +53,8 @@ export const wordpressData: PageData = {
   },
 
   quoteBanner: {
-    text: "I DON'T JUST BUILD SITES. I BUILD ",
-    highlight: "STORES THAT TAKE ORDERS.",
+    text: "I DON'T JUST\nBUILD SITES. I BUILD",
+    highlight: "STORES THAT TAKE\nORDERS.",
   },
 
   services: {

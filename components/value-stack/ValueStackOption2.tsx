@@ -20,29 +20,37 @@ const rowVariants = {
 const ValueStackOption2 = ({ data }: { data: ValueStackData }) => {
   return (
     <section
-      className="relative py-24 md:py-32 px-6 md:px-10 lg:px-20 overflow-hidden"
+      id="value-stack-option-2"
+      className="relative overflow-hidden py-24 md:py-32 px-6 md:px-10 lg:px-20"
       style={{ background: "#0A0A0A" }}
     >
-      <div
-        className="absolute select-none pointer-events-none"
+      <span
+        className="absolute select-none pointer-events-none font-display font-extrabold whitespace-nowrap"
         style={{
-          top: "40px",
-          left: "60px",
+          top: "50%",
+          right: "-60px",
+          transform: "translateY(-50%)",
           zIndex: 0,
-          fontSize: "clamp(6rem, 12vw, 12rem)",
+          fontSize: "clamp(8rem, 16vw, 18rem)",
           lineHeight: 1,
-          letterSpacing: "-0.04em",
+          letterSpacing: "-0.02em",
           color: "#F0F0F0",
-          opacity: 0.03,
+          opacity: 0.025,
         }}
       >
-        <span className="font-display font-extrabold">05</span>
-      </div>
+        VALUE
+      </span>
 
-      <div className="relative z-10 max-w-[1152px] mx-auto">
+      <div className="relative z-[1] max-w-[1152px] mx-auto">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-          <p className="font-mono-label text-xs text-muted-foreground tracking-[0.15em] uppercase mb-16">
+          <p className="font-mono-label text-xs text-muted-foreground tracking-[0.15em] uppercase mb-4 block">
             {data.sectionLabel}
+          </p>
+        </motion.div>
+
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+          <p className="font-body text-[15px] text-muted-foreground mb-14">
+            {data.introLine}
           </p>
         </motion.div>
 
@@ -138,14 +146,22 @@ const ValueStackOption2 = ({ data }: { data: ValueStackData }) => {
                 </div>
                 {item.badge && (
                   <span
-                    className="font-mono-label font-bold text-[11px] text-primary uppercase tracking-[0.12em] px-2.5 py-1 shrink-0 ml-4"
-                    style={{ border: "1px solid rgba(0, 235, 28, 0.3)" }}
+                    className="font-mono-label font-bold text-[11px] text-primary uppercase tracking-[0.12em] px-3.5 py-[5px] shrink-0 ml-4"
+                    style={{ border: "1px solid rgba(0, 235, 28, 0.3)", background: "transparent" }}
                   >
                     {item.badge}
                   </span>
                 )}
               </motion.div>
             ))}
+
+            <motion.div
+              initial={{ scaleX: 0, opacity: 0 }}
+              whileInView={{ scaleX: 1, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: 0.5 }}
+              className="mt-[72px] mb-12 h-[2px] bg-primary origin-left w-full md:hidden"
+            />
           </div>
         </div>
       </div>

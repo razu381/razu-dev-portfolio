@@ -20,33 +20,36 @@ const rowVariants = {
 const ValueStackOption1 = ({ data }: { data: ValueStackData }) => {
   return (
     <section
-      className="relative py-24 md:py-32 px-6 md:px-10 lg:px-20 overflow-hidden"
+      id="value-stack-option-1"
+      className="relative overflow-hidden py-24 md:py-32 px-6 md:px-10 lg:px-20"
       style={{ background: "#0A0A0A" }}
     >
-      <div
-        className="absolute top-0 select-none pointer-events-none"
+      <span
+        className="absolute select-none pointer-events-none font-display font-extrabold whitespace-nowrap"
         style={{
-          left: "-20px",
+          top: "50%",
+          right: "-60px",
+          transform: "translateY(-50%)",
           zIndex: 0,
-          fontSize: "clamp(8rem, 14vw, 16rem)",
+          fontSize: "clamp(8rem, 16vw, 18rem)",
           lineHeight: 1,
           letterSpacing: "-0.02em",
           color: "#F0F0F0",
           opacity: 0.025,
         }}
       >
-        <span className="font-display font-extrabold">INCLUDED</span>
-      </div>
+        VALUE
+      </span>
 
-      <div className="relative z-10 max-w-[1152px] mx-auto">
+      <div className="relative z-[1] max-w-[1152px] mx-auto">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-          <p className="font-mono-label text-xs text-muted-foreground tracking-[0.15em] uppercase mb-6">
+          <p className="font-mono-label text-xs text-muted-foreground tracking-[0.15em] uppercase mb-4 block">
             {data.sectionLabel}
           </p>
         </motion.div>
 
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-          <p className="font-body text-[15px] text-muted-foreground mb-12">
+          <p className="font-body text-[15px] text-muted-foreground mb-14">
             {data.introLine}
           </p>
         </motion.div>
@@ -73,7 +76,7 @@ const ValueStackOption1 = ({ data }: { data: ValueStackData }) => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="flex items-center justify-between py-[18px]"
+              className="flex items-center justify-between py-[22px]"
               style={{
                 borderTop: i === 0 ? "1px solid #1A1A1A" : undefined,
                 borderBottom: "1px solid #1A1A1A",
@@ -81,15 +84,15 @@ const ValueStackOption1 = ({ data }: { data: ValueStackData }) => {
             >
               <div className="flex items-center flex-1 min-w-0">
                 <span className="font-mono-label text-primary mr-4 shrink-0">✓</span>
-                <p className="font-body text-base text-foreground truncate">
+                <p className="font-body text-[17px] text-foreground">
                   {item.text}
                   {item.bold && <span className="font-bold">{item.bold}</span>}
                 </p>
               </div>
               {item.badge && (
                 <span
-                  className="font-mono-label font-bold text-[11px] text-primary uppercase tracking-[0.12em] px-2.5 py-1 shrink-0 ml-4"
-                  style={{ border: "1px solid rgba(0, 235, 28, 0.3)" }}
+                  className="font-mono-label font-bold text-[11px] text-primary uppercase tracking-[0.12em] px-3.5 py-[5px] shrink-0 ml-4"
+                  style={{ border: "1px solid rgba(0, 235, 28, 0.3)", background: "transparent" }}
                 >
                   {item.badge}
                 </span>
@@ -99,11 +102,11 @@ const ValueStackOption1 = ({ data }: { data: ValueStackData }) => {
         </div>
 
         <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
+          initial={{ scaleX: 0, opacity: 0 }}
+          whileInView={{ scaleX: 1, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: "easeOut", delay: 0.5 }}
-          className="mt-16 h-[2px] bg-primary origin-left"
+          className="mt-[72px] mb-12 h-[2px] bg-primary origin-left w-full"
         />
 
         <motion.div
@@ -111,7 +114,6 @@ const ValueStackOption1 = ({ data }: { data: ValueStackData }) => {
           whileInView="visible"
           viewport={{ once: true }}
           variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { delay: 0.6, duration: 0.6 } } }}
-          className="mt-10"
         >
           <p
             className="font-heading font-bold text-foreground leading-[1.3] max-w-[720px] whitespace-pre-line"

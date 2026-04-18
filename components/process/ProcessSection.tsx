@@ -20,10 +20,26 @@ const stepVariants = {
 const ProcessSection = ({ data }: { data: ProcessData }) => {
   return (
     <section
-      className="relative py-24 md:py-32 px-6 md:px-10 lg:px-20 overflow-hidden"
+      className="relative overflow-hidden py-24 md:py-32 px-6 md:px-10 lg:px-20"
       style={{ background: "#080808" }}
     >
-      <div className="relative z-10 max-w-[1152px] mx-auto">
+      <span
+        className="absolute select-none pointer-events-none font-display font-extrabold"
+        style={{
+          top: "40px",
+          right: "-40px",
+          zIndex: 0,
+          fontSize: "clamp(10rem, 18vw, 20rem)",
+          lineHeight: 1,
+          letterSpacing: "-0.04em",
+          color: "#F0F0F0",
+          opacity: 0.025,
+        }}
+      >
+        03
+      </span>
+
+      <div className="relative z-[1] max-w-[1152px] mx-auto">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -48,7 +64,7 @@ const ProcessSection = ({ data }: { data: ProcessData }) => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-50px" }}
-              className="pl-6"
+              className="pl-7 transition-all duration-300 hover:border-l-[rgba(0,235,28,0.6)]"
               style={{
                 borderLeft: "3px solid rgba(0,235,28,0.25)",
               }}
@@ -62,6 +78,7 @@ const ProcessSection = ({ data }: { data: ProcessData }) => {
               >
                 {step.number}
               </span>
+              <div className="w-full h-px bg-[#1A1A1A] mb-4" />
               <h3 className="font-heading font-bold text-lg md:text-xl text-foreground mb-3">
                 {step.title}
               </h3>
