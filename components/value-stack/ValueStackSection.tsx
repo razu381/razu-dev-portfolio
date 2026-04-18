@@ -125,7 +125,7 @@ const ValueStackSection = ({ data }: { data: ValueStackData }) => {
           </motion.div>
         </div>
 
-        <div className="mt-12 lg:mt-20">
+        <div className="mt-12 lg:mt-20 grid grid-cols-1 md:grid-cols-2 gap-x-8 border-t border-[#1A1A1A]">
           {data.checklist.map((item, i) => (
             <motion.div
               key={i}
@@ -134,21 +134,17 @@ const ValueStackSection = ({ data }: { data: ValueStackData }) => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="flex items-center justify-between py-5 border-b border-foreground/[0.04] group transition-colors duration-200 hover:bg-surface"
-              style={{
-                borderTop: i === 0 ? "1px solid #1A1A1A" : undefined,
-                borderBottom: "1px solid #1A1A1A",
-              }}
+              className="flex items-center justify-between py-5 border-b border-[#1A1A1A] group transition-colors duration-200 hover:bg-surface"
             >
-              <div className="flex items-center gap-4 min-w-0">
+              <div className="flex items-center gap-3 min-w-0 pr-4">
                 <span className="font-mono-label text-primary text-sm shrink-0">✓</span>
-                <p className="font-body text-sm md:text-base text-foreground leading-relaxed">
+                <p className="font-body text-sm text-foreground leading-relaxed truncate">
                   {item.text}
                   {item.bold && <span className="font-bold">{item.bold}</span>}
                 </p>
               </div>
               {item.badge && (
-                <span className="font-mono-label font-bold text-[11px] text-primary uppercase tracking-[0.12em] px-3 py-[5px] shrink-0 ml-4 border border-primary/30 bg-transparent">
+                <span className="font-mono-label font-bold text-[11px] text-primary uppercase tracking-[0.12em] px-2.5 py-[4px] shrink-0 border border-primary/30 bg-transparent">
                   {item.badge}
                 </span>
               )}
