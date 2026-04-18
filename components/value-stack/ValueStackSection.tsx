@@ -35,6 +35,23 @@ const GlowingCard = ({ item, i, totalCards }: { item: any; i: number; totalCards
   const cardRef = useRef<HTMLDivElement>(null);
   const num = String(i + 1).padStart(2, "0");
 
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start 80%", "end 20%"],
+  });
+
+  const activeGlowOpacity = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0, 1, 1, 0]);
+  const activeBorderColor = useTransform(
+    scrollYProgress,
+    [0, 0.15, 0.85, 1],
+    [
+      "hsla(0, 0%, 94.1%, 0.04)", // base border
+      "hsla(128, 100%, 46%, 0.4)", // primary/40
+      "hsla(128, 100%, 46%, 0.4)",
+      "hsla(0, 0%, 94.1%, 0.04)"
+    ]
+  );
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
@@ -52,16 +69,25 @@ const GlowingCard = ({ item, i, totalCards }: { item: any; i: number; totalCards
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="brutalist-card bg-surface border border-foreground/[0.04] p-6 relative group overflow-hidden"
+      className="brutalist-card bg-surface border p-6 relative group overflow-hidden"
       style={{
         position: "sticky",
         top: `calc(8rem + ${i * 4.5}rem)`,
         zIndex: i,
-        // Optional: add a slight shadow so overlapping cards pop
         boxShadow: "0 -4px 20px rgba(0,0,0,0.4)",
+        borderColor: activeBorderColor,
       }}
     >
-      {/* Glow Effect */}
+      {/* Scroll Active Glow Effect */}
+      <motion.div
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          opacity: activeGlowOpacity,
+          background: `radial-gradient(600px circle at 50% 50%, hsla(128, 100%, 46%, 0.08), transparent 40%)`,
+        }}
+      />
+
+      {/* Mouse Hover Glow Effect */}
       <div
         className="pointer-events-none absolute inset-0 transition-opacity duration-300 z-0"
         style={{
@@ -85,9 +111,9 @@ const GlowingCard = ({ item, i, totalCards }: { item: any; i: number; totalCards
             </span>
           )}
         </div>
-        <p className="font-body text-sm text-foreground leading-relaxed">
+        <p className="font-body text-base md:text-lg font-medium text-foreground leading-relaxed">
           {item.text}
-          {item.bold && <span className="font-bold">{item.bold}</span>}
+          {item.bold && <span className="font-bold text-primary">{item.bold}</span>}
         </p>
       </div>
     </motion.div>
