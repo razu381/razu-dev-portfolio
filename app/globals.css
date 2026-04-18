@@ -257,3 +257,12 @@
   .services-grid > :nth-child(5) { grid-area: e; }
   .services-grid > :nth-child(6) { grid-area: f; }
 }
+
+/* Hardware-accelerated smooth scrolling for project images */
+@keyframes scroll-yoyo {
+  0% { transform: translateY(0%); }
+  100% { transform: translateY(calc(-100% + 100cqh)); }
+}
+.animate-scroll-yoyo {
+  animation: scroll-yoyo 15s linear infinite alternate;
+}

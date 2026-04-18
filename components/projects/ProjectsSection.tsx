@@ -205,7 +205,7 @@ const ProjectPanel = ({ project, isActive }: {
       <div className="flex-1 flex justify-center items-center relative min-h-[400px]">
         {/* Ambient Blurred Backdrop */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-[60%] h-[60%] bg-primary/20 rounded-full blur-[100px]" />
+          <div className="w-[80%] h-[80%] bg-primary/20 rounded-full blur-[100px]" />
         </div>
 
         {/* 3D Tilt Container */}
@@ -214,32 +214,26 @@ const ProjectPanel = ({ project, isActive }: {
           style={{ ...style }}
           onMouseMove={onMouseMove}
           onMouseLeave={onMouseLeave}
-          className="relative w-full max-w-[400px] aspect-[4/5] border border-white/10 bg-white/[0.02] backdrop-blur-xl rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(0,234,28,0.1)] z-10 flex flex-col cursor-crosshair"
+          className="relative w-full max-w-[550px] aspect-square border border-white/10 bg-white/[0.02] backdrop-blur-xl rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(0,234,28,0.1)] z-10 flex flex-col cursor-crosshair"
         >
           {/* Subtle Browser Header */}
           <div className="h-10 border-b border-white/10 bg-black/40 flex items-center px-4 gap-2.5 shrink-0 backdrop-blur-md">
-            <div className="w-2.5 h-2.5 rounded-full bg-white/20" />
-            <div className="w-2.5 h-2.5 rounded-full bg-white/20" />
-            <div className="w-2.5 h-2.5 rounded-full bg-white/20" />
+            <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
+            <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
+            <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
           </div>
           
-          {/* Scrolling Image */}
-          <motion.div
-            className="w-full flex-1 bg-no-repeat"
-            style={{
-              backgroundImage: `url('/home-cannaware-shop.png')`,
-              backgroundSize: "100% auto",
-            }}
-            initial={{ backgroundPositionY: "0%" }}
-            whileInView={{ backgroundPositionY: "100%" }}
-            viewport={{ once: false }}
-            transition={{
-              duration: 15,
-              ease: "linear",
-              repeat: Infinity,
-              repeatType: "reverse"
-            }}
-          />
+          {/* Scrolling Image via Hardware-Accelerated CSS Transform */}
+          <div 
+            className="w-full flex-1 relative overflow-hidden bg-black" 
+            style={{ containerType: "size" }}
+          >
+            <img
+              src="/home-cannaware-shop.png"
+              alt="Project Screenshot"
+              className="w-full h-auto absolute top-0 left-0 animate-scroll-yoyo"
+            />
+          </div>
         </motion.div>
       </div>
     </div>

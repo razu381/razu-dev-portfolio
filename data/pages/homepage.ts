@@ -48,8 +48,8 @@ export const homepageData: PageData = {
   },
 
   quoteBanner: {
-    text: "I DON'T JUST BUILD SITES. I BUILD ",
-    highlight: "BUSINESSES.",
+    text: "I DON'T JUST CREATE WEBSITES. I BUILD EXPERIENCES.",
+    highlight: "I BUILD EXPERIENCES.",
   },
 
   services: {
