@@ -173,7 +173,7 @@ const ProjectPanel = ({ project }: {
         <div className="mb-6 w-[60px] h-[2px] bg-primary" />
 
         {/* Description */}
-        <p className="mb-8 max-w-[400px] font-body text-sm md:text-base text-muted-foreground">
+        <p className="mb-8 max-w-[400px] min-h-[72px] font-body text-sm md:text-base text-muted-foreground">
           {project.description}
         </p>
 
