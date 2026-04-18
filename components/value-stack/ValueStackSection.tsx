@@ -29,7 +29,7 @@ const cardVariants = {
   }),
 };
 
-const GlowingCard = ({ item, i }: { item: any; i: number }) => {
+const GlowingCard = ({ item, i, totalCards }: { item: any; i: number; totalCards: number }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -53,6 +53,13 @@ const GlowingCard = ({ item, i }: { item: any; i: number }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className="brutalist-card bg-surface border border-foreground/[0.04] p-6 relative group overflow-hidden"
+      style={{
+        position: "sticky",
+        top: `calc(8rem + ${i * 4.5}rem)`,
+        zIndex: i,
+        // Optional: add a slight shadow so overlapping cards pop
+        boxShadow: "0 -4px 20px rgba(0,0,0,0.4)",
+      }}
     >
       {/* Glow Effect */}
       <div
@@ -181,9 +188,9 @@ const ValueStackSection = ({ data }: { data: ValueStackData }) => {
           {/* RIGHT COLUMN - SCROLLING CONTENT */}
           <div>
             {/* CHECKLIST - NUMBERED CARDS */}
-            <div className="space-y-4">
+            <div className="flex flex-col gap-[15vh] pb-[10vh]">
               {data.checklist.map((item, i) => (
-                <GlowingCard key={i} item={item} i={i} />
+                <GlowingCard key={i} item={item} i={i} totalCards={data.checklist.length} />
               ))}
             </div>
 
