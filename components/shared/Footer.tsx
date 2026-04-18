@@ -31,12 +31,15 @@ const Footer = () => {
     };
   }, []);
 
+  const useLocalHash = isHome || pathname === "/wordpress-development";
+
   const footerLinks = [
-    { label: "Work", href: isHome ? "#projects" : "/#projects" },
-    { label: "About", href: isHome ? "#about" : "/#about" },
+    { label: "Work", href: useLocalHash ? "#projects" : "/#projects" },
+    { label: "About", href: useLocalHash ? "#about" : "/#about" },
+    { label: "WordPress", href: "/wordpress-development" },
     { label: "Blog", href: "/blog" },
-    { label: "Reviews", href: isHome ? "#reviews" : "/#reviews" },
-    { label: "Contact", href: isHome ? "#contact" : "/#contact" },
+    { label: "Reviews", href: useLocalHash ? "#reviews" : "/#reviews" },
+    { label: "Contact", href: useLocalHash ? "#contact" : "/#contact" },
   ];
 
   return (

@@ -10,25 +10,25 @@ import ContactSection from "@/components/contact/ContactSection";
 import Footer from "@/components/shared/Footer";
 import QuoteBanner from "@/components/shared/QuoteBanner";
 import DiagonalDivider from "@/components/shared/DiagonalDivider";
+import { homepageData } from "@/data/pages/homepage";
 
 export default function Home() {
   return (
     <>
       <CustomCursor />
       <Navbar />
-      <HeroSection />
-      <AboutSection />
+      <HeroSection data={homepageData.hero} />
+      <AboutSection data={homepageData.about} />
       <QuoteBanner
-        text="I DON'T JUST BUILD SITES. I BUILD "
-        highlight="BUSINESSES."
+        text={homepageData.quoteBanner.text}
+        highlight={homepageData.quoteBanner.highlight}
       />
-      <ServicesSection />
-      <ProjectsSection />
-      {/* Project Sidebar */}
-      <ProjectSidebar />
+      <ServicesSection data={homepageData.services} />
+      <ProjectsSection data={homepageData.projects} />
+      <ProjectSidebar data={homepageData.projects.projects} />
       <BlogPreviewSection />
-      <ReviewsSection />
-      <ContactSection />
+      <ReviewsSection data={homepageData.reviews} />
+      <ContactSection data={homepageData.contact} />
       <Footer />
     </>
   );

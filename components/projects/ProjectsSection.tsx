@@ -4,14 +4,7 @@ import { useState, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Marquee from "../shared/Marquee";
 import { useTilt } from "@/hooks/useTilt";
-
-const legacyProjects = [
-  { name: "Luminary — SaaS Landing Page", tags: ["Next.js", "Tailwind CSS", "Framer Motion"], desc: "High-converting SaaS landing page with animated hero, scroll-triggered sections, and a 98 PageSpeed score.", align: "left", width: "65%" },
-  { name: "TaskFlow — Project Management App", tags: ["React", "TypeScript", "Supabase"], desc: "Full-featured project management dashboard with real-time updates, drag-and-drop boards, and role-based access.", align: "right", width: "55%" },
-  { name: "Meridian — Architecture Studio", tags: ["Next.js", "Sanity CMS", "Tailwind"], desc: "Award-worthy portfolio site for an architecture firm — custom cursor, parallax gallery, and CMS-powered case studies.", align: "left", width: "60%" },
-  { name: "PulseMetrics — Analytics Dashboard", tags: ["React", "Framer Motion", "REST API"], desc: "Data visualization dashboard with animated charts, filterable tables, and a dark/light theme toggle.", align: "right", width: "45%" },
-  { name: "Storefront — E-Commerce Frontend", tags: ["Next.js", "Tailwind CSS", "Stripe"], desc: "Headless e-commerce frontend with cart, wishlist, Stripe checkout, and blazing-fast static product pages.", align: "left", width: "100%" },
-];
+import { ProjectsData, LegacyProject, Project } from "@/data/pages/types";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -20,7 +13,7 @@ const fadeUp = {
 
 // Project card with 3D tilt effect
 const ProjectCard = ({ project, variants, index, isMobile }: {
-  project: typeof legacyProjects[0];
+  project: LegacyProject;
   variants: typeof fadeUp;
   index: number;
   isMobile?: boolean;
@@ -80,43 +73,43 @@ const ProjectCard = ({ project, variants, index, isMobile }: {
   );
 };
 
-const ProjectsSection = () => {
+const ProjectsSection = ({ data }: { data: ProjectsData }) => {
 
   return (
     <section id="projects" className="relative py-24 md:py-32 overflow-hidden" style={{ background: "#0a0a0a" }}>
       {/* Vertical label */}
       <div className="hidden lg:block absolute left-6 top-32 font-mono-label text-xs text-primary tracking-[0.2em] uppercase"
         style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}>
-        [ 03 — WORK ]
+        {data.sectionLabel}
       </div>
 
-      <Marquee text="SELECTED WORK · SELECTED WORK · SELECTED WORK ·" />
+      <Marquee text={data.marqueeText} />
 
       {/* Ghost text */}
       <div
         className="absolute top-24 left-0 right-0 text-center font-display font-extrabold text-stroke select-none"
         style={{ fontSize: "clamp(5rem, 18vw, 18rem)", lineHeight: 1 }}>
-        WORK
+        {data.ghostText}
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-10 lg:px-20 mt-16">
         <p className="font-mono-label text-sm text-muted-foreground mb-4 tracking-wider">
-          <span className="text-primary">[ 03 ]</span> &nbsp;SITES I'VE SHIPPED
+          {data.sublabel}
         </p>
         <p className="font-mono-label text-xs text-muted-foreground/60 mb-16 tracking-wider">
-          React · Next.js · Tailwind CSS · TypeScript · Framer Motion
+          {data.sublabelDetail}
         </p>
 
         {/* Desktop: overlapping grid - HIDDEN TEMPORARILY */}
         {/* <div className="hidden md:block space-y-[-3rem]">
-          {legacyProjects.map((p, i) => (
+          {data.legacyProjects.map((p, i) => (
             <ProjectCard key={p.name} project={p} variants={fadeUp} index={i} />
           ))}
         </div> */}
 
         {/* Mobile: horizontal scroll snap - HIDDEN TEMPORARILY */}
         {/* <div className="md:hidden flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 -mx-6 px-6 scrollbar-hide">
-          {legacyProjects.map((p, i) => (
+          {data.legacyProjects.map((p, i) => (
             <ProjectCard key={p.name} project={p} variants={fadeUp} index={i} isMobile />
           ))}
         </div> */}
@@ -126,40 +119,6 @@ const ProjectsSection = () => {
 };
 
 // ===== CONCEPT 03: Vertical Sidebar Index =====
-const projects = [
-  {
-    id: 1,
-    title: "Luminary SaaS Platform",
-    description: "Full-scale SaaS landing page with animated hero, scroll-triggered sections, and 98 PageSpeed score. Features pricing calculator, testimonials, and integration showcases.",
-    category: "E-COMMERCE",
-    year: "2024",
-    techStack: ["Next.js", "Tailwind", "Framer Motion", "Stripe"],
-  },
-  {
-    id: 2,
-    title: "TaskFlow Dashboard",
-    description: "Project management with real-time updates, drag-and-drop boards, and role-based access control for teams.",
-    category: "SaaS",
-    year: "2024",
-    techStack: ["React", "TypeScript", "Supabase"],
-  },
-  {
-    id: 3,
-    title: "Meridian Studio",
-    description: "Architecture firm portfolio with custom cursor, parallax gallery, and CMS-powered case studies.",
-    category: "PORTFOLIO",
-    year: "2023",
-    techStack: ["Next.js", "Sanity CMS", "Tailwind"],
-  },
-  {
-    id: 4,
-    title: "PulseMetrics",
-    description: "Analytics dashboard with animated charts, filterable tables, and dark/light theme toggle.",
-    category: "DASHBOARD",
-    year: "2024",
-    techStack: ["React", "Framer Motion", "REST API"],
-  },
-];
 
 const ProjectButton = ({ number, index, activeIndex, onClick }: {
   number: number;
@@ -193,7 +152,7 @@ const ProjectButton = ({ number, index, activeIndex, onClick }: {
 };
 
 const ProjectPanel = ({ project, isActive }: {
-  project: typeof projects[0];
+  project: Project;
   isActive: boolean;
 }) => {
   return (
@@ -252,7 +211,7 @@ const ProjectPanel = ({ project, isActive }: {
   );
 };
 
-export const ProjectSidebar = () => {
+export const ProjectSidebar = ({ data }: { data: Project[] }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
@@ -266,7 +225,7 @@ export const ProjectSidebar = () => {
         <div className="flex min-h-[480px]">
           {/* Left Sidebar */}
           <div className="flex flex-col w-[60px] border-r-2 border-primary">
-            {projects.map((project, index) => (
+            {data.map((project, index) => (
               <ProjectButton
                 key={project.id}
                 number={index + 1}
@@ -279,7 +238,7 @@ export const ProjectSidebar = () => {
 
           {/* Right Content Area */}
           <div className="flex-1 p-8 md:p-12 relative">
-            {projects.map((project, index) => (
+            {data.map((project, index) => (
               <ProjectPanel
                 key={project.id}
                 project={project}

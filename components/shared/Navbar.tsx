@@ -11,12 +11,16 @@ const Navbar = () => {
   const pathname = usePathname();
   const isHome = pathname === "/";
 
+  const useLocalHash = isHome || pathname === "/wordpress-development";
+  const contactHref = useLocalHash ? "#contact" : "/#contact";
+
   const navLinks = [
-    { label: "WORK", href: isHome ? "#projects" : "/#projects" },
-    { label: "ABOUT", href: isHome ? "#about" : "/#about" },
+    { label: "WORK", href: useLocalHash ? "#projects" : "/#projects" },
+    { label: "ABOUT", href: useLocalHash ? "#about" : "/#about" },
+    { label: "WORDPRESS", href: "/wordpress-development" },
     { label: "BLOG", href: "/blog" },
-    { label: "REVIEWS", href: isHome ? "#reviews" : "/#reviews" },
-    { label: "CONTACT", href: isHome ? "#contact" : "/#contact" },
+    { label: "REVIEWS", href: useLocalHash ? "#reviews" : "/#reviews" },
+    { label: "CONTACT", href: useLocalHash ? "#contact" : "/#contact" },
   ];
 
   // Staggered menu variants
@@ -70,7 +74,7 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          <a href={isHome ? "#contact" : "/#contact"}
+          <a href={contactHref}
             className="hidden md:inline-block font-heading font-bold text-xs bg-primary text-primary-foreground px-5 py-2.5 hover:brightness-110 transition-all">
             HIRE ME →
           </a>
@@ -118,7 +122,7 @@ const Navbar = () => {
             })}
             <motion.a
               variants={itemVariants}
-              href={isHome ? "#contact" : "/#contact"}
+              href={contactHref}
               onClick={() => setOpen(false)}
               className="font-heading font-bold bg-primary text-primary-foreground px-8 py-3 text-lg mt-4"
             >
