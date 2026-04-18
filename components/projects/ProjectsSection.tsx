@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import Marquee from "../shared/Marquee";
 import { useTilt } from "@/hooks/useTilt";
 import { ProjectsData, LegacyProject, Project } from "@/data/pages/types";
@@ -131,7 +131,7 @@ const ProjectButton = ({ number, index, activeIndex, onClick }: {
 
   return (
     <button
-      className={`flex-1 flex items-center justify-center transition-all duration-150 border-b border-zinc-700 ${isActive
+      className={`flex-1 flex items-center justify-center transition-all duration-300 border-b border-zinc-700 ${isActive
         ? 'bg-primary text-primary-foreground border-primary'
         : 'bg-green-950/30 text-primary/70 hover:bg-green-950/60 hover:text-primary'
         }`}
@@ -150,17 +150,13 @@ const ProjectButton = ({ number, index, activeIndex, onClick }: {
   );
 };
 
-const ProjectPanel = ({ project, isActive }: {
+const ProjectPanel = ({ project }: {
   project: Project;
-  isActive: boolean;
 }) => {
   const { ref, style, onMouseMove, onMouseLeave } = useTilt();
 
   return (
-    <div
-      className={`flex-1 gap-12 lg:gap-16 transition-opacity duration-300 ${isActive ? 'opacity-100 flex flex-col md:flex-row md:items-center' : 'opacity-0 hidden'
-        }`}
-    >
+    <div className="flex-1 gap-12 lg:gap-16 flex flex-col md:flex-row md:items-center w-full">
       {/* Left Content */}
       <div className="flex-1">
         {/* Tag */}
@@ -266,14 +262,19 @@ export const ProjectSidebar = ({ data }: { data: Project[] }) => {
           </div>
 
           {/* Right Content Area */}
-          <div className="flex-1 pl-8 md:pl-12 relative flex flex-col">
-            {data.map((project, index) => (
-              <ProjectPanel
-                key={project.id}
-                project={project}
-                isActive={activeIndex === index}
-              />
-            ))}
+          <div className="flex-1 pl-8 md:pl-12 relative grid grid-cols-1 grid-rows-1">
+            <AnimatePresence>
+              <motion.div
+                key={activeIndex}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0, pointerEvents: "auto" }}
+                exit={{ opacity: 0, y: -10, pointerEvents: "none" }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                className="col-start-1 row-start-1 w-full h-full flex"
+              >
+                <ProjectPanel project={data[activeIndex]} />
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </div>

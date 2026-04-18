@@ -3,10 +3,11 @@ import { PageData } from "./types";
 export const wordpressData: PageData = {
   hero: {
     badge: "[ WORDPRESS & WOOCOMMERCE DEVELOPER ]",
-    greeting: "HI, I AM",
-    nameHighlight: "SHOHIDUL",
-    scrambleText: "RAZU",
-    scrambleStyle: { fontSize: "clamp(2.5rem, 7vw, 7rem)" },
+    greeting: "HI, I AM RAZU",
+    nameHighlight: "WORDPRESS",
+    nameHighlightStyle: { fontSize: "clamp(2.5rem, 6vw, 4rem)", lineHeight: 1 },
+    scrambleText: "DEVELOPER",
+    scrambleStyle: { fontSize: "clamp(2.5rem, 7vw, 4rem)", lineHeight: 1 },
     roleTags:
       "I build WooCommerce stores and booking systems that take orders — not excuses.",
     spineLabel: "WordPress Developer · WooCommerce · Booking Systems",

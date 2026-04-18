@@ -9,6 +9,7 @@ export interface HeroData {
   badge: string;
   greeting: string;
   nameHighlight: string;
+  nameHighlightStyle?: React.CSSProperties;
   scrambleText: string;
   scrambleStyle: React.CSSProperties;
   roleTags: string;
