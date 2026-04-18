@@ -203,9 +203,22 @@ const ProjectPanel = ({ project, isActive }: {
 
       {/* Right Image */}
       <div className="flex-1 max-w-[500px]">
-        <div className="aspect-video w-full flex items-center justify-center border border-border bg-gradient-to-br from-zinc-900 to-green-950/20">
-          <span className="font-mono-label text-xs text-muted-foreground tracking-wider">[ PROJECT SCREENSHOT ]</span>
-        </div>
+        <motion.div 
+          className="aspect-[4/3] md:aspect-video w-full border border-border bg-no-repeat"
+          style={{ 
+            backgroundImage: `url('/home-cannaware-shop.png')`,
+            backgroundSize: "100% auto"
+          }}
+          initial={{ backgroundPositionY: "0%" }}
+          whileInView={{ backgroundPositionY: "100%" }}
+          viewport={{ once: false }}
+          transition={{
+            duration: 15,
+            ease: "linear",
+            repeat: Infinity,
+            repeatType: "reverse"
+          }}
+        />
       </div>
     </div>
   );
