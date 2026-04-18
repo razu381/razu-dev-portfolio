@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef, useState } from "react";
+import { motion, useScroll, useTransform, useSpring, useMotionTemplate } from "framer-motion";
 import Marquee from "../shared/Marquee";
 import type { ValueStackData } from "@/data/pages/types";
 
@@ -28,9 +29,96 @@ const cardVariants = {
   }),
 };
 
+const GlowingCard = ({ item, i }: { item: any; i: number }) => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const num = String(i + 1).padStart(2, "0");
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    setMousePosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  };
+
+  return (
+    <motion.div
+      ref={cardRef}
+      custom={i}
+      variants={cardVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="brutalist-card bg-surface border border-foreground/[0.04] p-6 relative group overflow-hidden"
+    >
+      {/* Glow Effect */}
+      <div
+        className="pointer-events-none absolute inset-0 transition-opacity duration-300 z-0"
+        style={{
+          opacity: isHovered ? 1 : 0,
+          background: `radial-gradient(400px circle at ${mousePosition.x}px ${mousePosition.y}px, hsla(128, 100%, 46%, 0.08), transparent 40%)`,
+        }}
+      />
+
+      {/* Content */}
+      <div className="relative z-10">
+        <div className="flex items-start justify-between mb-3">
+          <span
+            className="font-mono-label font-bold text-primary/20 select-none transition-colors duration-300 group-hover:text-primary/40"
+            style={{ fontSize: "2.5rem", lineHeight: 1, letterSpacing: "-0.03em" }}
+          >
+            {num}
+          </span>
+          {item.badge && (
+            <span className="font-mono-label font-bold text-[10px] text-primary uppercase tracking-[0.12em] px-2 py-[3px] border border-primary/25 bg-transparent shrink-0">
+              {item.badge}
+            </span>
+          )}
+        </div>
+        <p className="font-body text-sm text-foreground leading-relaxed">
+          {item.text}
+          {item.bold && <span className="font-bold">{item.bold}</span>}
+        </p>
+      </div>
+    </motion.div>
+  );
+};
+
 const ValueStackSection = ({ data }: { data: ValueStackData }) => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const stepsContainerRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress: sectionProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const { scrollYProgress: stepsProgress } = useScroll({
+    target: stepsContainerRef,
+    offset: ["start center", "end center"],
+  });
+
+  const smoothSectionProgress = useSpring(sectionProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
+  const smoothStepsProgress = useSpring(stepsProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
+  const clipPathInset = useTransform(smoothSectionProgress, [0.2, 0.8], [100, 0]);
+  const clipPath = useMotionTemplate`inset(${clipPathInset}% 0 0 0)`;
+
   return (
     <section
+      ref={sectionRef}
       className="relative py-24 md:py-32 px-6 md:px-10 lg:px-20"
       style={{ background: "#0a0a0a" }}
     >
@@ -63,14 +151,20 @@ const ValueStackSection = ({ data }: { data: ValueStackData }) => {
           [{data.bigNum}] {data.sectionLabel}
         </motion.p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-12 lg:gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] lg:items-start gap-12 lg:gap-16">
           {/* LEFT COLUMN - STICKY HEADLINE */}
-          <div className="lg:sticky lg:top-32">
+          <div className="lg:sticky lg:top-32 lg:self-start lg:h-fit">
             <span
-              className="font-display font-extrabold text-primary/15 select-none block"
+              className="font-display font-extrabold text-primary/15 select-none block relative"
               style={{ fontSize: "8rem", lineHeight: 1 }}
             >
               {data.bigNum}
+              <motion.span
+                className="absolute inset-0 font-display font-extrabold text-primary select-none pointer-events-none"
+                style={{ clipPath }}
+              >
+                {data.bigNum}
+              </motion.span>
             </span>
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
               <h2 className="font-display font-bold text-2xl md:text-3xl leading-tight mt-4">
@@ -88,38 +182,9 @@ const ValueStackSection = ({ data }: { data: ValueStackData }) => {
           <div>
             {/* CHECKLIST - NUMBERED CARDS */}
             <div className="space-y-4">
-              {data.checklist.map((item, i) => {
-                const num = String(i + 1).padStart(2, "0");
-                return (
-                  <motion.div
-                    key={i}
-                    custom={i}
-                    variants={cardVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    className="brutalist-card bg-surface border border-foreground/[0.04] p-6 relative group"
-                  >
-                    <div className="flex items-start justify-between mb-3">
-                      <span
-                        className="font-mono-label font-bold text-primary/20 select-none"
-                        style={{ fontSize: "2.5rem", lineHeight: 1, letterSpacing: "-0.03em" }}
-                      >
-                        {num}
-                      </span>
-                      {item.badge && (
-                        <span className="font-mono-label font-bold text-[10px] text-primary uppercase tracking-[0.12em] px-2 py-[3px] border border-primary/25 bg-transparent shrink-0">
-                          {item.badge}
-                        </span>
-                      )}
-                    </div>
-                    <p className="font-body text-sm text-foreground leading-relaxed">
-                      {item.text}
-                      {item.bold && <span className="font-bold">{item.bold}</span>}
-                    </p>
-                  </motion.div>
-                );
-              })}
+              {data.checklist.map((item, i) => (
+                <GlowingCard key={i} item={item} i={i} />
+              ))}
             </div>
 
             {/* THIN RULE */}
@@ -142,28 +207,41 @@ const ValueStackSection = ({ data }: { data: ValueStackData }) => {
               {data.stepsLabel}
             </motion.p>
 
-            {data.steps.map((step, i) => (
+            <div className="relative" ref={stepsContainerRef}>
+              {/* Background Track Line */}
+              <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-foreground/10 z-10" />
+              {/* Animated Foreground Line */}
               <motion.div
-                key={step.number}
-                custom={i}
-                variants={stepVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="bg-surface-alt border-l-[3px] border-l-primary p-6 mb-6 transition-colors duration-300"
-                style={{ marginBottom: i === data.steps.length - 1 ? 0 : undefined }}
-              >
-                <span className="font-mono-label font-bold text-primary block mb-2" style={{ fontSize: "clamp(1.6rem, 3vw, 2.2rem)", lineHeight: 1 }}>
-                  {step.number}
-                </span>
-                <h4 className="font-heading font-bold text-sm text-foreground mb-2">
-                  {step.title}
-                </h4>
-                <p className="font-body text-sm text-muted-foreground leading-[1.65]">
-                  {step.body}
-                </p>
-              </motion.div>
-            ))}
+                className="absolute left-0 top-0 bottom-0 w-[3px] bg-primary origin-top z-20"
+                style={{ scaleY: smoothStepsProgress }}
+              />
+
+              {data.steps.map((step, i) => (
+                <motion.div
+                  key={step.number}
+                  custom={i}
+                  variants={stepVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  className="bg-surface-alt p-6 mb-6 transition-colors duration-300 relative z-0 ml-[3px]"
+                  style={{ marginBottom: i === data.steps.length - 1 ? 0 : undefined }}
+                >
+                  <span
+                    className="font-mono-label font-bold text-primary block mb-2"
+                    style={{ fontSize: "clamp(1.6rem, 3vw, 2.2rem)", lineHeight: 1 }}
+                  >
+                    {step.number}
+                  </span>
+                  <h4 className="font-heading font-bold text-sm text-foreground mb-2">
+                    {step.title}
+                  </h4>
+                  <p className="font-body text-sm text-muted-foreground leading-[1.65]">
+                    {step.body}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
 

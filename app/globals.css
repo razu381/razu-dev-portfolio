@@ -48,11 +48,11 @@
     @apply bg-background text-foreground;
     font-family: 'DM Sans', sans-serif;
     cursor: none;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
   html {
     scroll-behavior: smooth;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   @media (pointer: coarse) {
