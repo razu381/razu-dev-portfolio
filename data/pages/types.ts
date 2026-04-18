@@ -148,8 +148,12 @@ export interface ValueStackCheckItem {
 }
 
 export interface ValueStackData {
+  spineLabel: string;
   sectionLabel: string;
+  ghostText: string;
+  bigNum: string;
   introLine: string;
+  marquee: { text: string; highlightWords: string[] };
   headline: string;
   stepsLabel: string;
   steps: ProcessStep[];

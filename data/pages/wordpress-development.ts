@@ -111,9 +111,16 @@ export const wordpressData: PageData = {
   },
 
   valueStack: {
+    spineLabel: "[ 04 — VALUE ]",
     sectionLabel: "WHAT YOU ACTUALLY GET",
+    ghostText: "VALUE",
+    bigNum: "04",
     introLine:
       "This is what every premium client gets. Not an upsell menu — just the standard.",
+    marquee: {
+      text: "WHAT YOU GET · WHAT YOU GET · WHAT YOU GET ·",
+      highlightWords: ["INCLUDED", "FREE"],
+    },
     headline: "Most developers charge extra for this.\nIt's all included.",
     stepsLabel: "HOW IT WORKS",
     steps: [
