@@ -3,6 +3,9 @@
 import { motion } from "framer-motion";
 import Marquee from "../shared/Marquee";
 import type { ValueStackData } from "@/data/pages/types";
+import ChecklistA from "./checklist/ChecklistA";
+import ChecklistB from "./checklist/ChecklistB";
+import ChecklistC from "./checklist/ChecklistC";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -18,21 +21,10 @@ const stepVariants = {
   }),
 };
 
-const rowVariants = {
-  hidden: { opacity: 0, y: 60, rotateX: 10 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    rotateX: 0,
-    transition: {
-      delay: 0.15 + i * 0.08,
-      duration: 0.6,
-      ease: [0.22, 1, 0.36, 1] as const,
-    },
-  }),
-};
+const ValueStackSection = ({ data, checklistStyle = "A" }: { data: ValueStackData; checklistStyle?: "A" | "B" | "C" }) => {
+  const checklistComponents = { A: ChecklistA, B: ChecklistB, C: ChecklistC };
+  const ChecklistComponent = checklistComponents[checklistStyle];
 
-const ValueStackSection = ({ data }: { data: ValueStackData }) => {
   return (
     <section
       className="relative py-24 md:py-32 px-6 md:px-10 lg:px-20 overflow-hidden"
@@ -125,31 +117,8 @@ const ValueStackSection = ({ data }: { data: ValueStackData }) => {
           </motion.div>
         </div>
 
-        <div className="mt-12 lg:mt-20 grid grid-cols-1 md:grid-cols-2 gap-x-8 border-t border-[#1A1A1A]">
-          {data.checklist.map((item, i) => (
-            <motion.div
-              key={i}
-              custom={i}
-              variants={rowVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="flex items-center justify-between py-5 border-b border-[#1A1A1A] group transition-colors duration-200 hover:bg-surface"
-            >
-              <div className="flex items-center gap-3 min-w-0 pr-4">
-                <span className="font-mono-label text-primary text-sm shrink-0">✓</span>
-                <p className="font-body text-sm text-foreground leading-relaxed truncate">
-                  {item.text}
-                  {item.bold && <span className="font-bold">{item.bold}</span>}
-                </p>
-              </div>
-              {item.badge && (
-                <span className="font-mono-label font-bold text-[11px] text-primary uppercase tracking-[0.12em] px-2.5 py-[4px] shrink-0 border border-primary/30 bg-transparent">
-                  {item.badge}
-                </span>
-              )}
-            </motion.div>
-          ))}
+        <div className="mt-12 lg:mt-20">
+          <ChecklistComponent items={data.checklist} />
         </div>
 
         <motion.div
