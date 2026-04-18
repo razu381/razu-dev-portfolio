@@ -266,10 +266,10 @@ export const ProjectSidebar = ({ data }: { data: Project[] }) => {
             <AnimatePresence>
               <motion.div
                 key={activeIndex}
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0, pointerEvents: "auto" }}
-                exit={{ opacity: 0, y: -10, pointerEvents: "none" }}
-                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                exit={{ opacity: 0, y: -15, pointerEvents: "none" }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 className="col-start-1 row-start-1 w-full h-full flex"
               >
                 <ProjectPanel project={data[activeIndex]} />
