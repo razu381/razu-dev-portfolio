@@ -51,6 +51,8 @@ export interface ServiceCard {
   desc: string;
   num: string;
   area: string;
+  isUnique?: boolean;
+  badge?: string;
 }
 
 export interface ServicesData {
@@ -131,6 +133,7 @@ export interface ContactData {
   availabilityBadge: string;
   projectTypes: string[];
   budgetRanges: string[];
+  bulletList?: string[];
 }
 
 export interface QuoteBannerData {
@@ -138,11 +141,41 @@ export interface QuoteBannerData {
   highlight?: string;
 }
 
+export interface ValueStackCheckItem {
+  text: string;
+  bold?: string;
+}
+
+export interface ValueStackData {
+  sectionLabel: string;
+  introLine: string;
+  headline: string;
+  checklist: ValueStackCheckItem[];
+  riskReversal: string;
+  supportingLine: string;
+  cta: { label: string; href: string };
+}
+
+export interface ProcessStep {
+  number: string;
+  title: string;
+  body: string;
+}
+
+export interface ProcessData {
+  sectionLabel: string;
+  headline: string;
+  steps: ProcessStep[];
+  closingLine: string;
+}
+
 export interface PageData {
   hero: HeroData;
   about: AboutData;
   quoteBanner: QuoteBannerData;
   services: ServicesData;
+  valueStack?: ValueStackData;
+  process?: ProcessData;
   projects: ProjectsData;
   reviews: ReviewsData;
   contact: ContactData;

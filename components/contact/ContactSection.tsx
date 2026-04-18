@@ -145,6 +145,16 @@ const ContactSection = ({ data }: { data: ContactData }) => {
                 onMouseLeave={e => (e.currentTarget.style.boxShadow = "0 0 0 0 transparent")}>
                 {submitting ? "SENDING..." : "SEND MESSAGE →"}
               </motion.button>
+              {data.bulletList && data.bulletList.length > 0 && (
+                <motion.div variants={fadeUp} className="mt-6 space-y-2">
+                  {data.bulletList.map((item, i) => (
+                    <div key={i} className="flex items-start gap-2">
+                      <span className="w-1.5 h-1.5 bg-primary mt-1.5 shrink-0" />
+                      <span className="font-body text-sm text-muted-foreground">{item}</span>
+                    </div>
+                  ))}
+                </motion.div>
+              )}
             </motion.form>
           )}
         </div>

@@ -53,11 +53,19 @@ const TiltCard = ({ card, Icon, variants, index }: {
       viewport={{ once: true, margin: "-50px" }}
       variants={variants}
       custom={index}
-      className="brutalist-card bg-surface border border-foreground/[0.04] p-6 md:p-8 relative group"
+      className={`brutalist-card bg-surface p-6 md:p-8 relative group ${
+        card.isUnique
+          ? "border-2 border-primary"
+          : "border border-foreground/[0.04]"
+      }`}
     >
       <div className="flex items-start justify-between mb-6">
         <Icon size={28} className="text-primary transition-all group-hover:drop-shadow-[0_0_8px_hsl(128,100%,46%,0.5)]" />
-        <span className="font-mono-label text-xs text-muted-foreground/40">{card.num}</span>
+        {card.badge ? (
+          <span className="font-mono-label text-[10px] text-primary tracking-wider">{card.badge}</span>
+        ) : (
+          <span className="font-mono-label text-xs text-muted-foreground/40">{card.num}</span>
+        )}
       </div>
       <h3 className="font-heading font-bold text-sm md:text-base text-foreground mb-3 tracking-wide">{card.title}</h3>
       <p className="font-body text-sm text-muted-foreground leading-relaxed">{card.desc}</p>

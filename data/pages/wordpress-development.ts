@@ -2,22 +2,22 @@ import { PageData } from "./types";
 
 export const wordpressData: PageData = {
   hero: {
-    badge: "[ AVAILABLE · WORDPRESS SPECIALIST ]",
-    greeting: "EXPERT",
-    nameHighlight: "WORDPRESS",
-    scrambleText: "DEVELOPMENT",
+    badge: "[ WORDPRESS & WOOCOMMERCE DEVELOPER ]",
+    greeting: "HI, I AM",
+    nameHighlight: "SHOHIDUL",
+    scrambleText: "RAZU",
     scrambleStyle: { fontSize: "clamp(2.5rem, 7vw, 7rem)" },
     roleTags:
-      "WordPress  ·  WooCommerce  ·  Elementor  ·  Custom Themes  ·  PHP  ·  SEO",
-    spineLabel: "WordPress Developer · Custom Themes · WooCommerce",
+      "I build WooCommerce stores and booking systems that take orders — not excuses.",
+    spineLabel: "WordPress Developer · WooCommerce · Booking Systems",
     spineNum: "01/06",
     stats: [
-      { num: "50+", label: "WP Sites Launched" },
-      { num: "19", label: "Countries" },
-      { num: "4+", label: "Years Exp" },
+      { num: "50+", label: "Projects Delivered" },
+      { num: "19+", label: "Countries Served" },
+      { num: "4★+", label: "Upwork Rating" },
     ],
-    primaryCta: { label: "VIEW MY WORK", href: "#projects" },
-    secondaryCta: { label: "GET A QUOTE →", href: "#contact" },
+    primaryCta: { label: "See Your Free Homepage Design", href: "#contact" },
+    secondaryCta: { label: "View My Work", href: "#projects" },
     image: {
       src: "/shohidul-i-razu.png",
       srcSet:
@@ -26,35 +26,35 @@ export const wordpressData: PageData = {
       alt: "Shohidul Islam Razu - WordPress Developer",
     },
     marquee: {
-      text: "WORDPRESS · WOOCOMMERCE · ELEMENTOR · CUSTOM THEMES · PHP · SEO OPTIMIZATION · 50+ SITES · 19 COUNTRIES · 4 YEARS ·",
+      text: "WORDPRESS · WOOCOMMERCE · BOOKING SYSTEMS · ELEMENTOR · CUSTOM THEMES · 50+ SITES · 19 COUNTRIES ·",
       highlightWords: ["WORDPRESS", "WOOCOMMERCE", "50+"],
     },
   },
 
   about: {
-    sectionLabel: "[ 01 — ABOUT ]",
+    sectionLabel: "[ 01 — WHO BUILDS YOUR SITE MATTERS ]",
     ghostText: "ABOUT",
     bigNum: "01",
-    heading: "THE WP\nDEVELOPER\nBEHIND\nYOUR SITE.",
+    heading: "Former medical student.\nWordPress developer.\nDetail-oriented by training,\nconversion-focused by choice.",
     subtitle: "4 Years. 19 Countries. 50+ WordPress Sites Delivered.",
-    bio: "I'm Razu — a frontend developer and WordPress specialist based in Noakhali, Bangladesh. With 4 years of experience, I've built custom WordPress themes, WooCommerce stores, and Elementor-powered sites for clients across 19 countries. I focus on speed, SEO, and clean code that makes your site rank and convert.",
+    bio: "I build WooCommerce stores and booking systems that take orders — not excuses. Every checkout flow I build runs automated tests after launch, because your customers shouldn't be the ones finding bugs.",
     skills: [
-      "Custom WordPress Themes",
       "WooCommerce",
+      "Booking Systems",
       "Elementor Pro",
-      "SEO Optimization",
+      "WordPress Maintenance",
     ],
     quote: {
-      text: "I highly recommend Razu! Extremely patient, professional, and a great teacher. He exceeds every expectation!",
-      author: "Imola",
-      role: "Manager, Commerce Machine",
-      country: "Romania",
+      text: "My clients find out about checkout problems before their customers do — because every order flow I build runs automated tests after launch.",
+      author: "Razu",
+      role: "WordPress Developer",
+      country: "Bangladesh",
     },
   },
 
   quoteBanner: {
-    text: "YOUR WORDPRESS SITE SHOULD BE ",
-    highlight: "YOUR BEST EMPLOYEE.",
+    text: "I DON'T JUST BUILD SITES. I BUILD ",
+    highlight: "STORES THAT TAKE ORDERS.",
   },
 
   services: {
@@ -65,47 +65,110 @@ export const wordpressData: PageData = {
     cards: [
       {
         icon: "Monitor",
-        title: "CUSTOM WORDPRESS THEMES",
-        desc: "Bespoke WordPress themes built from your designs — no bloat, no page-builder lock-in, just clean PHP, CSS, and JavaScript.",
+        title: "WooCommerce Store Development",
+        desc: "A store that looks nothing like the templates everyone else is using. Built for conversion — from the product page to the thank-you screen.",
         num: "01",
         area: "a",
       },
       {
         icon: "Zap",
-        title: "WOOCOMMERCE STORE SETUP",
-        desc: "Full WooCommerce builds with product catalogs, payment gateways, shipping rules, and a checkout flow that converts.",
+        title: "Booking System Development",
+        desc: "Your own branded booking system — no Calendly subscription, no one else's logo. Fully yours, fully in your control.",
         num: "02",
         area: "b",
       },
       {
         icon: "Smartphone",
-        title: "RESPONSIVE & MOBILE-FIRST",
-        desc: "Every WordPress site I build looks pixel-perfect on phones, tablets, and desktops — no exceptions.",
+        title: "WordPress Website Development",
+        desc: "Fast, secure, and stable — built to handle real traffic without breaking. Not a pretty site that collapses the moment someone tries to buy.",
         num: "03",
         area: "c",
       },
       {
         icon: "Sparkles",
-        title: "SPEED & CORE WEB VITALS",
-        desc: "I optimize every WP site for 90+ PageSpeed scores — lazy loading, caching, image optimization, and clean code.",
+        title: "Custom Elementor Widget Development",
+        desc: "When the standard widgets aren't enough for what you're building. Custom components built to match your exact design — pixel for pixel.",
         num: "04",
         area: "d",
       },
       {
         icon: "Globe",
-        title: "SEO & RANKING READINESS",
-        desc: "On-page SEO, schema markup, sitemap generation, and Yoast/RankMath configuration — so your site gets found.",
+        title: "Automated Order & Booking Flow Monitoring",
+        desc: "A script that checks your checkout and booking flow every 15 minutes. Available as a standalone addon — or bundled into the Maintenance package below.",
         num: "05",
         area: "e",
+        isUnique: true,
+        badge: "[ UNIQUE SERVICE ]",
       },
       {
         icon: "Layers",
-        title: "MAINTENANCE & SUPPORT",
-        desc: "Ongoing WordPress maintenance — plugin updates, security patches, backups, and performance monitoring.",
+        title: "WordPress Maintenance — with Monitoring Included",
+        desc: "Updates, backups, security, and automated order flow testing — all handled. The monitoring addon is bundled here. Most developers charge extra for it.",
         num: "06",
         area: "f",
       },
     ],
+  },
+
+  valueStack: {
+    sectionLabel: "WHAT YOU ACTUALLY GET",
+    introLine:
+      "This is what every premium client gets. Not an upsell menu — just the standard.",
+    headline: "Most developers charge extra for this.\nIt's all included.",
+    checklist: [
+      {
+        text: "Free 3–4 section homepage mockup — ",
+        bold: "before you sign anything",
+      },
+      {
+        text: "Revisions until you're proud to share it — ",
+        bold: "no cap, no extra invoices",
+      },
+      {
+        text: "30-day bug fix after launch — ",
+        bold: "free",
+      },
+      {
+        text: "Speed & security hardening — ",
+        bold: "included on every project",
+      },
+      {
+        text: "Automated backup system — ",
+        bold: "included",
+      },
+      {
+        text: "On-page SEO structure (titles, schema, sitemap) — ",
+        bold: "included",
+      },
+    ],
+    riskReversal:
+      "You see the homepage design before you pay a cent. If you don't love the direction, walk away. No invoice. No awkward email. Nothing.",
+    supportingLine:
+      "I only take projects I'm confident I can deliver. The mockup shows both of us if we're the right fit — before either of us commits.",
+    cta: { label: "Get Your Free Homepage Design →", href: "#contact" },
+  },
+
+  process: {
+    sectionLabel: "HOW IT WORKS",
+    headline: "You see it before you buy it.",
+    steps: [
+      {
+        number: "01",
+        title: "Free Mockup First",
+        body: "We talk. I understand your business, your customers, and what a successful site looks like for you. Then I build a free 3–4 section homepage concept. You approve the direction — or walk away. Zero obligation. No invoice. Nothing.",
+      },
+      {
+        number: "02",
+        title: "Build Together",
+        body: "You send your logo, content, and brand direction. I build the homepage first — we lock it in. Then the rest of the site, page by page, approved by you at every step. No surprises.",
+      },
+      {
+        number: "03",
+        title: "Test & Launch",
+        body: "Before anything goes live, I run automated tests on your order and booking flow. You get a site that has been checked, not just built. Then we launch — and I'm still here for 30 days after.",
+      },
+    ],
+    closingLine: 'No ghost developers. No "it worked on my machine."',
   },
 
   projects: {
@@ -235,11 +298,11 @@ export const wordpressData: PageData = {
     marqueeText: "LET'S BUILD · LET'S BUILD · LET'S BUILD ·",
     ghostText: "CONTACT",
     sublabel: "[ 06 — LET'S BUILD ]",
-    heading: ["READY TO", "LAUNCH YOUR", "WORDPRESS", "SITE?"],
-    headingHighlight: "SITE?",
+    heading: ["READY TO SEE", "YOUR SITE", "BEFORE YOU", "PAY FOR IT?"],
+    headingHighlight: "PAY FOR IT?",
     headingHighlightStyle: { fontSize: "clamp(3rem, 6vw, 5rem)" },
     description:
-      "Available for new WordPress projects. Whether it's a custom theme, a WooCommerce store, or a full site rebuild — let's talk.",
+      "Get a free 3–4 section homepage concept. No contract. If you don't love the direction, you owe nothing.",
     contactInfo: [
       { icon: "MapPin", text: "Noakhali, Bangladesh" },
       { icon: "Mail", text: "contact@razu.dev" },
@@ -256,5 +319,11 @@ export const wordpressData: PageData = {
       "Other",
     ],
     budgetRanges: ["Under $200", "$200–$500", "$500–$1000", "$1000+"],
+    bulletList: [
+      "No upfront payment required",
+      "30-day bug fix guarantee after launch",
+      "Automated testing included on every project",
+      "Built for WooCommerce and booking systems",
+    ],
   },
 };
